@@ -1,37 +1,22 @@
-import java.util.Collection;
+package Management;
 
-public class Customer{
+public class Customer {
+    private String name, fuelType,VehicleType;
+    private int fuelamount;
 
-    private int customerId;
-    private String vehicleType;
-
-    private String fuelType;
-
-    private int fuelAmount;
-
-    public Customer(int customerId,String vehicleType, String fuelType, int fuelAmount) {
-        this.customerId = customerId;
-
-        this.vehicleType = vehicleType;
+    public Customer(String name, String fuelType, String vehicleType, int fuelamount) {
+        this.name = name;
         this.fuelType = fuelType;
-        this.fuelAmount = fuelAmount;
+        VehicleType = vehicleType;
+        this.fuelamount = fuelamount;
     }
 
-    public int getCustomerId() {
-        return customerId;
+    public String getName() {
+        return name;
     }
 
-    public void setCustomerId(int customerId) {
-        this.customerId = customerId;
-    }
-
-
-    public String getVehicleType() {
-        return vehicleType;
-    }
-
-    public void setVehicleType(String vehicleType) {
-        this.vehicleType = vehicleType;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getFuelType() {
@@ -42,22 +27,23 @@ public class Customer{
         this.fuelType = fuelType;
     }
 
-    public int getFuelAmount() {
-        return fuelAmount;
+    public String getVehicleType() {
+        return VehicleType;
     }
 
-    public void setFuelAmount(int fuelAmount) {
-        this.fuelAmount = fuelAmount;
+    public void setVehicleType(String vehicleType) {
+        VehicleType = vehicleType;
     }
 
-    @Override
-    public String toString() {
-        return "Customer{" +
-                +customerId +" "+
-        vehicleType +" "+ '\'' +
-                 fuelType+ '\'' +
-                 " "+ fuelAmount+
-                '}';
+    public int getFuelamount() {
+        return fuelamount;
     }
-//    mmmmmmmmmm
+
+    public void setFuelamount(int fuelamount) {
+        this.fuelamount = fuelamount;
+    }
+    public String toString()
+    {
+        return "Customer {"+name+"-"+fuelType+"-"+VehicleType+"-"+fuelamount+"}";
+    }
 }

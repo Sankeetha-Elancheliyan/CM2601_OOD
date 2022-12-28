@@ -2,15 +2,33 @@ package Management;
 
 import java.util.LinkedList;
 
-public class CommonQueue extends Queue{
-    private int length;
-    
+public class CommonQueue {
     LinkedList commonqueue=new LinkedList();
-    public int getLength() {
-        return length;
+
+    private int NumberInQueue;
+
+
+//    public CommonQueue(LinkedList commonqueue,int numberInQueue) {
+//        this.commonqueue = commonqueue;
+//        NumberInQueue = numberInQueue;
+//    }
+
+
+
+    public boolean addQueue(Customer c){
+        return commonqueue.add(c);
     }
 
-    public void setLength(int length) {
-        this.length = length;
+    public boolean removeQueue(Customer c){
+        return commonqueue.remove(c);
     }
+    public int getNumberInQueue() {
+        return NumberInQueue;
+    }
+
+    public void setNumberInQueue(int numberInQueue) {
+        NumberInQueue = numberInQueue;
+    }
+
+
 }
