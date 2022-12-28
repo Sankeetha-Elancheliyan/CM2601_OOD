@@ -16,7 +16,7 @@ public class CashPayment {
         this.balance=balance;
     }
     
-    public cashPayment(String paymentType, double paymentValue, Customer customer, Operator operator) {
+    public CashPayment(String paymentType, double paymentValue, Customer customer, Operator operator) {
         this.paymentType = paymentType;
         this.paymentValue = paymentValue;
         this.customer = customer;
