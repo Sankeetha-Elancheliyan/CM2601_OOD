@@ -3,16 +3,26 @@ package Management;
 public class PetrolFuelRepository extends CentralFuelRepository{
     private double availablePetrol;
 
-    public PetrolFuelRepository(int repositoryNum, String name, double capacity,double availablePetrol) {
-        super(repositoryNum, name, capacity);
-        this.availablePetrol=availablePetrol;
+   private ArrayList<PetrolFuelDispenseManager> listOfPetrolDispenser =new A
+    
+    public PetrolFuelRepository(double stockAmount, double capacity, DateTime datetime, boolean is500L, double availableFuel) {
+        super(stockAmount, capacity, datetime, is500L);
+        this.availableFuel = availableFuel;
     }
 
-    public double getAvailablePetrol() {
-        return availablePetrol;
+    public void addListOfDieselDispenser(PetrolFuelDispenseManager d){
+        this.listOfPetrolDispenser.add(d);
     }
 
-    public void restockPetrol(double availablePetrol) {
-        this.availablePetrol = availablePetrol;
+    public void removeListOfDieselDispenser(PetrolFuelDispenseManager d){
+        this.listOfPetrolDispenser.remove(d);
     }
+    public double getAvailableFuel() {
+        return availableFuel;
+    }
+
+    public void setAvailableFuel(double availableFuel) {
+        this.availableFuel = availableFuel;
+    }
+
 }
