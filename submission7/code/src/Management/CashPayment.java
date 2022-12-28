@@ -8,6 +8,10 @@ public class CashPayment extends Payment{
         super(payId, amount);
         this.balance=balance;
     }
+    
+    public CashPayment(){
+
+    }
 
     public double getBalance() {
         return balance;
@@ -15,5 +19,6 @@ public class CashPayment extends Payment{
 
     public void setBalance(double balance) {
         this.balance = balance;
+        
     }
 }
