@@ -6,7 +6,7 @@ public class CentralFuelRepository {
     private DateTime dateTime;
     private boolean is500L;
 
-    public CentralRepository(double stockAmount, double capacity, DateTime datetime, boolean is500L) {
+    public CentralFuelRepository(double stockAmount, double capacity, DateTime datetime, boolean is500L) {
         StockAmount = stockAmount;
         Capacity = capacity;
         this.dateTime=datetime;
