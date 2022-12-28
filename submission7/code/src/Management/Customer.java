@@ -1,44 +1,62 @@
-package Management;
+import java.util.Collection;
 
-public class Customer  {
-    private int cId,phoneNum;
-    private  String name,fuelType,VehicleType;
+public class Customer{
 
+    private int customerId;
+    private String vehicleType;
 
-    public Customer(String name, int phoneNum,  int cId, String fuelType, String vehicleType) {
+    private String fuelType;
+
+    private int fuelAmount;
+
+    public Customer(int customerId,String vehicleType, String fuelType, int fuelAmount) {
+        this.customerId = customerId;
+
+        this.vehicleType = vehicleType;
         this.fuelType = fuelType;
-        this.VehicleType = vehicleType;
+        this.fuelAmount = fuelAmount;
     }
 
-    public String getName() {
-        return name;
+    public int getCustomerId() {
+        return customerId;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public int getCId() {
-        return cId;
-    }
-
-    public void setCId(int cId) {
-        this.cId = cId;
-    }
-
-    public int getPhoneNum() {
-        return phoneNum;
-    }
-
-    public void setPhoneNum(int phoneNum) {
-        this.phoneNum = phoneNum;
-    }
-
-    public void getPayment() {
-
+    public void setCustomerId(int customerId) {
+        this.customerId = customerId;
     }
 
 
+    public String getVehicleType() {
+        return vehicleType;
+    }
 
+    public void setVehicleType(String vehicleType) {
+        this.vehicleType = vehicleType;
+    }
+
+    public String getFuelType() {
+        return fuelType;
+    }
+
+    public void setFuelType(String fuelType) {
+        this.fuelType = fuelType;
+    }
+
+    public int getFuelAmount() {
+        return fuelAmount;
+    }
+
+    public void setFuelAmount(int fuelAmount) {
+        this.fuelAmount = fuelAmount;
+    }
+
+    @Override
+    public String toString() {
+        return "Customer{" +
+                +customerId +" "+
+        vehicleType +" "+ '\'' +
+                 fuelType+ '\'' +
+                 " "+ fuelAmount+
+                '}';
+    }
 }
-
