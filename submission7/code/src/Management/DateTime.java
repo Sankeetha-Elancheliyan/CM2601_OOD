@@ -1,22 +1,26 @@
-package Management;
+import java.time.LocalDateTime;
 
 public class DateTime {
-    private String date,time;
-    private int dispensedPetrol,dispensedDiesel;
+    private LocalDateTime dateTime;
 
-    public String getDate() {
-        return date;
+    public DateTime() {
+        LocalDateTime dateTime=LocalDateTime.now();
+        this.dateTime = dateTime;
     }
 
-    public void setDate(String date) {
-        this.date = date;
+    public LocalDateTime getDateTime() {
+        return dateTime;
     }
 
-    public int getDispensedDiesel() {
-        return dispensedDiesel;
+    @Override
+    public String toString() {
+        return "DateTime{" +
+                "dateTime=" + dateTime +
+                '}';
     }
-
-    public int getDispensedPetrol() {
-        return dispensedPetrol;
-    }
+//    public static void main(String[] args) {
+//        DateTime v = new DateTime();
+//        System.out.println(v.getDateTime());
+//    }
 }
+

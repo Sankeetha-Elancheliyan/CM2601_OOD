@@ -1,13 +1,15 @@
-package Management;
-
 public class Ticket {
-    private int tId;
+    private int ticketNumber;
 
-    public int getTId() {
-        return tId;
+    public Ticket(int ticketNumber) {
+        this.ticketNumber = ticketNumber;
     }
 
-    public void setTId(int ticketId) {
-        this.tId = ticketId;
+    public int getTicketNumber() {
+        return ticketNumber;
+    }
+
+    public void setTicketNumber(int ticketNumber) {
+        this.ticketNumber = ticketNumber;
     }
 }

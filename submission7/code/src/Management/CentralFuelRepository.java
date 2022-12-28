@@ -1,29 +1,26 @@
 package Management;
 
 public class CentralFuelRepository {
-    private int repositoryNum;
-    private String name;
-    private double capacity;
+    private double StockAmount;
+    private double Capacity;
+    private DateTime dateTime;
+    private boolean is500L;
 
-    public  CentralFuelRepository(int repositoryNum, String name,double capacity ) {
-        this.repositoryNum = repositoryNum;
-        this.name= name;
-        this.capacity = capacity;
+    public CentralFuelRepository(double stockAmount, double capacity, DateTime datetime, boolean is500L) {
+        StockAmount = stockAmount;
+        Capacity = capacity;
+        this.dateTime=datetime;
+        this.is500L = is500L;
     }
 
-    public double getCapacity() {
-        return capacity;
+    public double getStockAmount() {
+        return StockAmount;
     }
 
-    public void setCapacity(double capacity) {
-        this.capacity = capacity;
+    public void setStockAmount(double stockAmount) {
+        StockAmount = stockAmount;
     }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
+    public boolean stopPumping(){
+        return is500L;
     }
 }
