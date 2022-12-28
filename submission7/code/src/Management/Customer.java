@@ -3,7 +3,7 @@ package Management;
 public class Customer {
     private String name, fuelType,VehicleType;
     private int fuelamount;
-
+    //cmt
     public Customer(String name, String fuelType, String vehicleType, int fuelamount) {
         this.name = name;
         this.fuelType = fuelType;
