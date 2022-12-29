@@ -1,5 +1,6 @@
 package Management;
 
+import java.sql.SQLOutput;
 import java.util.Collection;
 import java.util.List;
 
@@ -42,9 +43,12 @@ public class driver {
         Customer c22 =new Customer("Songimonkey","diesel","PublicTransport",18);
 
 ////////////////////////////////////////////////////////////////////////////////////////////////
-
+        System.out.println("Fuel Dispensing Management System ");
+        System.out.println("_______******************________\n");
         DateTime v = new DateTime();
-        System.out.println(v.getDateTime());
+        System.out.println("Welcome");
+//        System.out.println(v.getDateTime());
+        System.out.println();
         System.out.println(v);
         /////////////////////////////////////////////////
 
@@ -127,10 +131,20 @@ public class driver {
 //        for(int i=0;i<=ocd1.dispenserqueue.size();i++){
 //            System.out.println();
 //        }
+//        before adding customers
+        System.out.println("\nInitial Slots");
+        System.out.println("Available slots in Dispenser queue 1 :"+(10-ocd1.dispenserqueue.size()));
+        System.out.println("Available slots in Dispenser queue 2 :"+(10-ocd2.dispenserqueue.size()));
+        System.out.println("Available slots in Dispenser queue 3 :"+(10-ocd3.dispenserqueue.size()));
+        System.out.println("Available slots in Dispenser queue 4 :"+(10-ocd4.dispenserqueue.size()));
+        System.out.println("Available slots in Dispenser queue 5 :"+(10-dd1.dispenserqueue.size()));
+        System.out.println("Available slots in Dispenser queue 6 :"+(10-dd2.dispenserqueue.size()));
+        System.out.println("Available slots in Dispenser queue 7 :"+(10-dd3.dispenserqueue.size()));
 
+        System.out.println("Common queue length :"+ commonQueue.commonqueue.size());
+        System.out.println(commonQueue.commonqueue+"\n");
 
-
-
+//      adding customers
         for(Customer c: listcustomers){
             // if the vehicle is octane and other type vehicle adding to ocd2 if, not adding to the shortest of ocd1 or ocd2, if neither to the common queue
             if((c.getFuelType().equals("octane") && (c.getVehicleType().equals("Car") || c.getVehicleType().equals("Van"))) || (c.getFuelType().equals("octane") && (c.getVehicleType().equals("Car") || c.getVehicleType().equals("Van") || c.getVehicleType().equals("Other")))){
