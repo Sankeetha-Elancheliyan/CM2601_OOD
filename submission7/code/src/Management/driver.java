@@ -330,6 +330,29 @@ public class driver {
         System.out.println("\nAvailable fuel in octane repository :"+ availbalefuelpetrol+"l");
         System.out.println("Available fuel in diesel repository :"+ availbalefueldiesel+"l");
 
+        double DieselFuelAtRepo = dieselrepo.getAvailableFuel();
+        DieselFuelDispenseManager DD1 = new DieselFuelDispenseManager(5, "public transport vehicles", "Diesel", true);
+        DieselFuelDispenseManager DD2 = new DieselFuelDispenseManager(6, "other vehicles", "Diesel", true);
+        DieselFuelDispenseManager DD3 = new DieselFuelDispenseManager(7, "other vehicles", "Diesel", true);
+
+        Thread serviceDd3;
+        while(dd1.dispenserqueue.size() > 0) {
+            serviceDd3 = new Thread(DD1);
+            serviceDd3.start();
+        }
+
+        while(dd2.dispenserqueue.size() > 0) {
+            serviceDd3 = new Thread(DD2);
+            serviceDd3.start();
+        }
+
+        while(dd3.dispenserqueue.size() > 0) {
+            serviceDd3 = new Thread(DD3);
+            serviceDd3.start();
+        }
+
+
+
         System.out.println(c1);
         System.out.println("common queue: "+ commonQueue.commonqueue);
 

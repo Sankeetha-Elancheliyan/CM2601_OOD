@@ -1,7 +1,22 @@
 package Management;
 
-public class DieselFuelDispenseManager implements FuelDispenseManager{
-    private double fuelPumped,unitPrice,amount;
+public class DieselFuelDispenseManager implements FuelDispenseManager, Runnable{
+//    private double fuelPumped,unitPrice,amount;
+
+    private double fuelPumped;
+    private double unitPrice;
+    private double amount;
+    private int dispenserNumber;
+    private String fuelType;
+    private String vehicleType;
+    private boolean availability;
+
+    public DieselFuelDispenseManager(int i, String vehicles, String d, boolean b) {
+        this.dispenserNumber = i;
+        this.fuelType = d;
+        this.vehicleType = vehicles;
+        this.availability = b;
+    }
 
 
 
@@ -56,5 +71,15 @@ public class DieselFuelDispenseManager implements FuelDispenseManager{
     }
     public double dieselIncome(){
         return this.unitPrice*this.fuelPumped;
+    }
+
+    @Override
+    public void run() {
+        //Check availabilitu
+        //dispense
+        System.out.println("Diesel Supplied");
+        //Update
+        //payment
+        //dequeue
     }
 }
