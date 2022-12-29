@@ -29,16 +29,18 @@ public class driver {
         Customer c9=new Customer("kumaru","octane","Van",13);
         Customer c10=new Customer("Ashvin","octane","Car",8);
         Customer c11=new Customer("kumaru","octane","Van",10);
-        Customer c12=new Customer("Ashvin","diesel","Car",25);
-        Customer c13=new Customer("kumaru","diesel","Van",12);
-        Customer c14=new Customer("Ashvin","diesel","Car",15);
-        Customer c15=new Customer("kumaru","diesel","Van",15);
-        Customer c16=new Customer("Songi","diesel","Van",15);
+        Customer c12=new Customer("Ashvin","diesel","Other",25);
+        Customer c13=new Customer("kumaru","diesel","Other",12);
+        Customer c14=new Customer("Ashvin","diesel","Other",15);
+        Customer c15=new Customer("kumaru","diesel","Other",15);
+        Customer c16=new Customer("Songi","diesel","Other",15);
         Customer c17 =new Customer("hhh","octane","Car",12);
         Customer c18 =new Customer("jjjj","octane","Car",10);
         Customer c19 =new Customer("oooo","octane","Car",10);
         Customer c20 =new Customer("pppp","octane","Car",10);
         Customer c21 =new Customer("rrr","octane","Other",10);
+        Customer c22 =new Customer("Songimonkey","diesel","PublicTransport",18);
+
 ////////////////////////////////////////////////////////////////////////////////////////////////
 
         DateTime v = new DateTime();
@@ -110,7 +112,7 @@ public class driver {
 //        }
 
 
-        Collection<Customer> listcustomers= List.of(c1,c2,c3,c4,c5,c6,c7,c8,c9,c10,c11,c12,c13,c14,c15,c16,c17,c18,c19,c20,c21);
+        Collection<Customer> listcustomers= List.of(c1,c2,c3,c4,c5,c6,c7,c8,c9,c10,c11,c12,c13,c14,c15,c16,c17,c18,c19,c20,c21,c22);
 
 //        Collection<Customer> listcustomers= List.of(c1,c2,c3,c4,c5,c6,c7,c8,c9,c10,c11,c12,c13,c14,c15);
 //        listcustomers.add(c16);
