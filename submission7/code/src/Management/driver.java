@@ -38,6 +38,7 @@ public class driver {
         Customer c18 =new Customer("jjjj","octane","Car",10);
         Customer c19 =new Customer("oooo","octane","Car",10);
         Customer c20 =new Customer("pppp","octane","Car",10);
+        Customer c21 =new Customer("rrr","octane","Other",10);
 ////////////////////////////////////////////////////////////////////////////////////////////////
 
         DateTime v = new DateTime();
@@ -45,21 +46,21 @@ public class driver {
         System.out.println(v);
         /////////////////////////////////////////////////
 
-        OctaneRepository octanerepo =new OctaneRepository(25000,25000,v,false,25000);
-        DieselRepository dieselrepo =new DieselRepository(25000,25000,v,false, 25000);
+        OctaneRepository octanerepo = new OctaneRepository(25000,25000,v,false,25000);
+        DieselRepository dieselrepo = new DieselRepository(25000,25000,v,false, 25000);
 
 /////////////////////////////////////////////////////////////////
 
-        DispenserQueue ocd1 =new DispenserQueue();
-        DispenserQueue ocd2 =new DispenserQueue();
-        DispenserQueue ocd3 =new DispenserQueue();
-        DispenserQueue ocd4 =new DispenserQueue();
+        DispenserQueue ocd1 = new DispenserQueue();
+        DispenserQueue ocd2 = new DispenserQueue();
+        DispenserQueue ocd3 = new DispenserQueue();
+        DispenserQueue ocd4 = new DispenserQueue();
 
-        DispenserQueue dd1 =new DispenserQueue();
-        DispenserQueue dd2 =new DispenserQueue();
-        DispenserQueue dd3 =new DispenserQueue();
+        DispenserQueue dd1 = new DispenserQueue();
+        DispenserQueue dd2 = new DispenserQueue();
+        DispenserQueue dd3 = new DispenserQueue();
 
-        CommonQueue commonQueue=new CommonQueue();
+        CommonQueue commonQueue = new CommonQueue();
 
 //        for(int i=0;i<ocd1.dispenserqueue.size();i++){
 //            try {
@@ -83,7 +84,7 @@ public class driver {
 
         Operator op1=new Operator("nissan");
 
-        Payment p1 =new Payment("cash",5000,c1 ,op1);
+        Payment p1 =new Payment("cash",5000,c1,op1);
         Payment p2 =new Payment("card",2000,c1,op1);
 
 
@@ -109,7 +110,7 @@ public class driver {
 //        }
 
 
-        Collection<Customer> listcustomers= List.of(c1,c2,c3,c4,c5,c6,c7,c8,c9,c10,c11,c12,c13,c14,c15,c16,c17,c18,c19,c20);
+        Collection<Customer> listcustomers= List.of(c1,c2,c3,c4,c5,c6,c7,c8,c9,c10,c11,c12,c13,c14,c15,c16,c17,c18,c19,c20,c21);
 
 //        Collection<Customer> listcustomers= List.of(c1,c2,c3,c4,c5,c6,c7,c8,c9,c10,c11,c12,c13,c14,c15);
 //        listcustomers.add(c16);
@@ -129,24 +130,26 @@ public class driver {
 
 
         for(Customer c: listcustomers){
-            if(c.getFuelType().equals("octane") && (c.getVehicleType().equals("Car") || c.getVehicleType().equals("Van"))){
-                if(ocd1.dispenserqueue.size()<10){
-                    ocd1.dispenserqueue.add(c);
+            // if the vehicle is octane and other type vehicle adding to ocd2 if, not adding to the shortest of ocd1 or ocd2, if neither to the common queue
+            if((c.getFuelType().equals("octane") && (c.getVehicleType().equals("Car") || c.getVehicleType().equals("Van"))) || (c.getFuelType().equals("octane") && (c.getVehicleType().equals("Car") || c.getVehicleType().equals("Van") || c.getVehicleType().equals("Other")))){
+                if(c.getVehicleType().equals("Other")){
+                    if(ocd2.dispenserqueue.size()<10){
+                        ocd2.dispenserqueue.add(c);
+                    }else{
+                        System.out.println("OCD2 Queue full added to the common queue");
+                        commonQueue.commonqueue.add(c);
+                    }
                 }
                 else{
-                    System.out.println("OCD1 Queue full added to the common queue");
-                    commonQueue.commonqueue.add(c);
-                }
-
-            }
-            else if(c.getFuelType().equals("octane") && (c.getVehicleType().equals("Car") || c.getVehicleType().equals("Van") || c.getVehicleType().equals("Other"))){
-                if(ocd2.dispenserqueue.size()<10){
-                    ocd2.dispenserqueue.add(c);
-                }
-                else{
-                    System.out.println("OCD2 Queue full");
-                    commonQueue.commonqueue.add(c);
-
+                    if (ocd1.dispenserqueue.size() < ocd2.dispenserqueue.size() || ocd1.dispenserqueue.size() < 10) {
+                        ocd1.dispenserqueue.add(c);
+                    } else if (ocd1.dispenserqueue.size() > ocd2.dispenserqueue.size() || ocd2.dispenserqueue.size() < 10) {
+                        ocd2.dispenserqueue.add(c);
+                        //System.out.println("OCD1 Queue full added to the common queue");
+                    } else {
+                        System.out.println("OCD1 Queue and OCD2 Queue full added to the common queue");
+                        commonQueue.commonqueue.add(c);
+                    }
                 }
 
             }
@@ -183,28 +186,21 @@ public class driver {
 
                 }
             }
-            else if(c.getFuelType().equals("diesel") && (c.getVehicleType().equals("Van"))){
 
-                if(dd2.dispenserqueue.size()<10){
+            //if other type disel vechile adding to the shortest dispenser
+            else if(c.getFuelType().equals("diesel") && (c.getVehicleType().equals("Other"))){
+
+                if (dd2.dispenserqueue.size() < dd3.dispenserqueue.size() || dd2.dispenserqueue.size() < 10) {
                     dd2.dispenserqueue.add(c);
-                }
-                else{
-                    System.out.println("Queue full");
-                    commonQueue.commonqueue.add(c);
-
-                }
-            }
-            else if(c.getFuelType().equals("diesel") && (c.getVehicleType().equals("Car"))){
-
-                if(dd3.dispenserqueue.size()<10){
+                } else if (dd2.dispenserqueue.size() > dd3.dispenserqueue.size() || dd3.dispenserqueue.size() < 10) {
                     dd3.dispenserqueue.add(c);
-                }
-                else{
-                    System.out.println("Queue full");
+                    //System.out.println("OCD1 Queue full added to the common queue");
+                } else {
+                    System.out.println("dd2 Queue and dd3 Queue full added to the common queue");
                     commonQueue.commonqueue.add(c);
-
                 }
             }
+
             else{
                 commonQueue.commonqueue.add(c);
             }
@@ -237,7 +233,7 @@ public class driver {
         System.out.println("Available slots in Dispenserqueue 7 :"+(10-dd3.dispenserqueue.size()));
 
         System.out.println("Common queue length :"+ commonQueue.commonqueue.size());
-        System.out.println(commonQueue.commonqueue);
+        System.out.println("common queue: "+ commonQueue.commonqueue);
 //        ocd1.addQueue()
 
 
@@ -305,16 +301,26 @@ public class driver {
         }
         OctaneFuelDispenseManager octaneFuelDispenseManager=new OctaneFuelDispenseManager(totalpetrol,450);
         DieselFuelDispenseManager dieselFuelDispenseManager =new DieselFuelDispenseManager(totaldiesel,430);
+
         System.out.println("\npetrol income "+octaneFuelDispenseManager.petrolIncome()+"rs");
         System.out.println("diesel income "+dieselFuelDispenseManager.dieselIncome()+"rs");
-        System.out.println("\nLargest amount of the fuel amount of the day :"+max+". Details -:"+cus);
+        System.out.println("\nLargest amount of the fuel amount of the day :"+max+"L. \nDetails -:"+cus);
+
         double availbalefuelpetrol =octanerepo.getAvailableFuel()-totalpetrol;
         double availbalefueldiesel =dieselrepo.getAvailableFuel()-totaldiesel;
         System.out.println("\nAvailable fuel in octane repository :"+ availbalefuelpetrol+"l");
         System.out.println("Available fuel in diesel repository :"+ availbalefueldiesel+"l");
 
-
         System.out.println(c1);
+        System.out.println("common queue: "+ commonQueue.commonqueue);
+
+        System.out.println(ocd1.dispenserqueue);
+        System.out.println(ocd2.dispenserqueue);
+        System.out.println(ocd3.dispenserqueue);
+        System.out.println(ocd4.dispenserqueue);
+        System.out.println(dd1.dispenserqueue);
+        System.out.println(dd2.dispenserqueue);
+        System.out.println(dd3.dispenserqueue);
     }
 
 
