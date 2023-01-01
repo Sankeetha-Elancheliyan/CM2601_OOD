@@ -1,6 +1,9 @@
 package Management;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
 import java.sql.SQLOutput;
+import java.sql.Statement;
 import java.util.Collection;
 import java.util.List;
 
@@ -228,6 +231,26 @@ public class driver {
 
         }
 
+        for(Customer c: listcustomers){
+            try {
+                Connection conn = DriverManager.getConnection(DB_URL, USER, PASS);
+                String sql = "INSERT INTO `customer` (`Name`, `FuelType`, `VehicleType`, `Amount`)"
+                        + "VALUES('" + c.getName() + "','" + c.getFuelType()
+                        + "','" +  c.getVehicleType() + "'," + c.getFuelamount()  + ")";
+                Statement stmt = conn.createStatement();
+                System.out.println(ocd1.dispenserqueue.poll()+"  removed");
+
+                int j = stmt.executeUpdate(sql);
+                if (j > 0) {
+                    System.out.println("ROW INSERTED");
+                    Thread.sleep(2000);
+                } else {
+                    System.out.println("ROW NOT INSERTED");
+                }
+            } catch (Exception e) {
+                System.out.println(e);
+            }
+        }
 
 //        System.out.println("common queue: "+ commonQueue.commonqueue);
 //        System.out.println("OCD1: "+ocd1.dispenserqueue);
