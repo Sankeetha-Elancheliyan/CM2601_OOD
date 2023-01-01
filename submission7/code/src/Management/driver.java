@@ -30,7 +30,7 @@ public class driver {
 
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws InterruptedException {
 
         Customer c1=new Customer("Ashvin","octane","Car",10);
         Customer c2=new Customer("vignesh","octane","Car",5);
@@ -404,23 +404,18 @@ public class driver {
         Thread serviceDD3 = new Thread(DD3);
         serviceDD3.start();
 
-            //System.out.println("the queue in driver class:" +dd2.dispenserqueue);
+        serviceOCD1.join();
+        serviceOCD2.join();
+        serviceOCD3.join();
+        serviceOCD4.join();
+        serviceDD1.join();
+        serviceDD2.join();
+        serviceDD3.join();
 
-//        while (dd3.dispenserqueue.size()>0) {
-//            Thread serviceDd3 = new Thread(DD3);
-//            serviceDd3.start();
-//        }
-
-//        Thread serviceDd3 = new Thread(DD3);
-//        serviceDd3.start();
-//        Thread serviceDd2 = new Thread(DD2);
-//        serviceDd2.start();
-
-
+        System.out.println("This is the end");
 
         CentralRepository centralRepo = new CentralRepository();
         centralRepo.printStats();
-
 
     }
 
