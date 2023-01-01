@@ -4,18 +4,14 @@ import java.util.LinkedList;
 import java.util.Queue;
 
 public class DispenserQueue {
-    Queue <Customer> dispenserqueue = new LinkedList<Customer>();
+    // queue to store customers waiting to use a dispenser
+    Queue<Customer> dispenserqueue = new LinkedList<Customer>();
 
-
-        //    public DispenserQueue(Queue dispenserqueue) {
-//        this.dispenserqueue = dispenserqueue;
-//    }
-
-
-    public void iterateUsingEnhancedForLoop(Queue<Customer> linkedList)
-    {
-
-//        System.out.print("Iterating the LinkedList using enhanced for loop : ");
+    /**
+     * Iterates through the given queue and prints the details of each customer
+     * @param linkedList queue to iterate through
+     */
+    public void iterateUsingEnhancedForLoop(Queue<Customer> linkedList) {
         System.out.println("--------------------------------------------");
         System.out.printf("%5s %11s %12s %12s ", "Name", "FuelType", "VehicleType", "FuelAmount");
         System.out.println();
@@ -23,21 +19,27 @@ public class DispenserQueue {
         for (Customer listElement : linkedList) {
             System.out.format("%5s %7s %12s %12s",listElement.getName(),listElement.getFuelamount(),listElement.getVehicleType(),listElement.getFuelamount() );
             System.out.println();
-
         }
         System.out.println("--------------------------------------------");
     }
-        public boolean addQueue(Customer c) {
-            if (dispenserqueue.size() < 10) {
-                return dispenserqueue.add(c);
-            } else {
-                return false;
-            }
-        }
-//public boolean addQueue(Customer c){
-//    return dispenserqueue.add(c);
-//}
 
+    /**
+     * Adds a customer to the dispenser queue if there is space available
+     * @param c customer to add to the queue
+     * @return true if customer was added, false if queue is full
+     */
+    public boolean addQueue(Customer c) {
+        if (dispenserqueue.size() < 10) {
+            return dispenserqueue.add(c);
+        } else {
+            return false;
+        }
+    }
+
+    /**
+     * Adds a customer to the dispenser queue if there is space available
+     * @param c customer to add to the queue
+     */
     public void addQ(Customer c) {
         if (dispenserqueue.size() < 10) {
             dispenserqueue.add(c);
@@ -45,21 +47,20 @@ public class DispenserQueue {
             System.out.println("Not enough space");
         }
     }
-        public boolean removeQueue(Customer c) {
-            return dispenserqueue.remove(c);
-        }
 
-        public void displayavailableSlots(){
-            System.out.println(dispenserqueue.size());
-        }
-//
-//    public Queue getDispenserqueue() {
-//        return dispenserqueue;
-//    }
+    /**
+     * Removes a customer from the dispenser queue
+     * @param c customer to remove from the queue
+     * @return true if customer was removed, false if customer was not found in the queue
+     */
+    public boolean removeQueue(Customer c) {
+        return dispenserqueue.remove(c);
+    }
 
-
-
-
-//
+    /**
+     * Displays the number of available slots in the dispenser queue
+     */
+    public void displayavailableSlots() {
+        System.out.println(dispenserqueue.size());
+    }
 }
-
