@@ -255,15 +255,6 @@ public class driver {
 
 
 
-
-        System.out.println("Available slots in Dispenserqueue 1 :"+(10-ocd1.dispenserqueue.size()));
-        System.out.println("Available slots in Dispenserqueue 2 :"+(10-ocd2.dispenserqueue.size()));
-        System.out.println("Available slots in Dispenserqueue 3 :"+(10-ocd3.dispenserqueue.size()));
-        System.out.println("Available slots in Dispenserqueue 4 :"+(10-ocd4.dispenserqueue.size()));
-        System.out.println("Available slots in Dispenserqueue 5 :"+(10-dd1.dispenserqueue.size()));
-        System.out.println("Available slots in Dispenserqueue 6 :"+(10-dd2.dispenserqueue.size()));
-        System.out.println("Available slots in Dispenserqueue 7 :"+(10-dd3.dispenserqueue.size()));
-
         System.out.println("Common queue length :"+ commonQueue.commonqueue.size());
         System.out.println("common queue: "+ commonQueue.commonqueue);
 //        ocd1.addQueue()
@@ -388,14 +379,6 @@ public class driver {
 //        Thread serviceDd2 = new Thread(DD2);
 //        serviceDd2.start();
 
-        System.out.println("common queue: "+ commonQueue.commonqueue);
-        System.out.println("OCD1: "+ocd1.dispenserqueue);
-        System.out.println("OCD2: "+ocd2.dispenserqueue);
-        System.out.println("OCD3: "+ocd3.dispenserqueue);
-        System.out.println("OCD4: "+ocd4.dispenserqueue);
-        System.out.println("DD1: "+dd1.dispenserqueue);
-        System.out.println("DD2: "+dd2.dispenserqueue);
-        System.out.println("DD3: "+dd3.dispenserqueue);
 
 
 ////        CentralRepository centralRepo = new CentralRepository();
