@@ -340,10 +340,10 @@ public class driver {
 //            serviceDd3.start();
 //        }
 
-        while(dd2.dispenserqueue.size() > 0) {
-            Thread serviceDd2 = new Thread(DD2);
-            serviceDd2.start();
-        }
+//        while(dd2.dispenserqueue.size() > 0) {
+//            Thread serviceDd2 = new Thread(DD2);
+//            serviceDd2.start();
+//        }
 
 //        while(dd3.dispenserqueue.size() > 0) {
 //            serviceDd3 = new Thread(DD3);
