@@ -20,6 +20,7 @@ public class CentralRepository {
     public void setStockAmount(double stockAmount) {
         StockAmount = stockAmount;
     }
+
     public boolean stopPumping(){
         return is500L;
     }

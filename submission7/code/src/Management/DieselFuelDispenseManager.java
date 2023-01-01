@@ -4,6 +4,7 @@ import java.util.Queue;
 
 public class DieselFuelDispenseManager implements FuelDispenseManager, Runnable{
 //    private double fuelPumped,unitPrice,amount;
+    private Operator operator;
 
     private final Queue<Customer> queue;
     private double fuelPumped,unitPrice,amount;
@@ -13,7 +14,7 @@ public class DieselFuelDispenseManager implements FuelDispenseManager, Runnable{
     private boolean availability;
     private  double availableDiesel;
 
-    public DieselFuelDispenseManager(int dispenserNumber, Queue<Customer> queue, String vehicleType,  String fuelType, boolean availability, double availableDiesel, double fuelPumped, double unitPrice ) {
+    public DieselFuelDispenseManager(int dispenserNumber, Queue<Customer> queue, String vehicleType,  String fuelType, boolean availability, double availableDiesel, double fuelPumped, double unitPrice , Operator operator) {
         this.queue = queue;
         this.fuelPumped = fuelPumped;
         this.unitPrice = unitPrice;
@@ -22,8 +23,12 @@ public class DieselFuelDispenseManager implements FuelDispenseManager, Runnable{
         this.vehicleType = vehicleType;
         this.availability = availability;
         this.availableDiesel = availableDiesel;
+        this.operator=operator;
     }
 
+//    public void setOperator(Operator operator) {
+//        this.operator = operator;
+//    }
 
     public double getFuelPumped() {
         return fuelPumped;
@@ -51,7 +56,7 @@ public class DieselFuelDispenseManager implements FuelDispenseManager, Runnable{
 
     @Override
     public void stopPumping() {
-        System.out.println("Not enough fuel");
+        this.availability = false;
     }
 
     @Override
@@ -68,23 +73,32 @@ public class DieselFuelDispenseManager implements FuelDispenseManager, Runnable{
         return this.unitPrice*this.fuelPumped;
     }
 
+
+
     @Override
     public void run() {
 
         while (queue.size() > 0) {
-            //Check availabilitu
-            System.out.println(availableDiesel);
-            //dispense
-            System.out.println("Diesel Supplied");
-            //Update
-            System.out.println("the ques is "+ queue);
-            //payment
-            System.out.println("the required fuels is for "+ queue.peek().getName() +" is :"+queue.peek().getFuelamount());
-            //dequeue
-            while (!queue.isEmpty()) {
-                System.out.println("the required fuels is for "+ queue.peek().getName() +" is :"+queue.peek().getFuelamount());
+            //Check availability
+            if (availableDiesel>500) {
+//                System.out.println(availableDiesel);
+                //dispense
+                System.out.println("Diesel Supplied");
+                availableDiesel-=queue.peek().getFuelamount();
+                //payment
+                System.out.println("The operator handling payment is " + operator.getName() +"\n the operator id is " + operator.getOp_id());
+//                System.out.println("the required fuels is for " + queue.peek().getName() + " is :" + queue.peek().getFuelamount());
+                //Update
+                System.out.println("the ques is " + queue);
+                //dequeue
+                System.out.println("the required fuels is for " + queue.peek().getName() + " is :" + queue.peek().getFuelamount());
                 Customer customer = queue.poll();
-                System.out.println("poll from the queue :"+customer);
+                System.out.println("poll from the queue :" + customer);
+            }else{
+                // stop supply
+                stopPumping();
+                System.out.println("The dispenser " + dispenserNumber + " unavailable until restock");
+                break;
             }
         }
 

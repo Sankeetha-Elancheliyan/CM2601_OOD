@@ -56,7 +56,7 @@ public class driver {
         /////////
 
         OctaneRepository octanerepo = new OctaneRepository(25000,25000,v,false,25000);
-        DieselRepository dieselrepo = new DieselRepository(25000,25000,v,false, 25000);
+        DieselRepository dieselrepo = new DieselRepository(25000,25000,v,false, 512);
 
         double fuelatdeiselrepo = dieselrepo.getAvailableFuel();
         System.out.println("avilable fuel: "+ fuelatdeiselrepo);
@@ -319,9 +319,12 @@ public class driver {
         // octaneFuelDispenseManager=new OctaneFuelDispenseManager(totalpetrol,450);
         //DieselFuelDispenseManager dieselFuelDispenseManager =new DieselFuelDispenseManager(totaldiesel,430);
 
+        Operator op = new Operator("Shobian");
+
+
         double DieselFuelAtRepo = dieselrepo.getAvailableFuel();
         double OctaneFuelAtRepo = octanerepo.getAvailableFuel();
-        DieselFuelDispenseManager DD2 = new DieselFuelDispenseManager(6, dd2.dispenserqueue, "other vehicles", "Diesel", true, DieselFuelAtRepo,totaldiesel,430);
+        DieselFuelDispenseManager DD2 = new DieselFuelDispenseManager(6, dd2.dispenserqueue, "other vehicles", "Diesel", true, DieselFuelAtRepo,totaldiesel,430,op);
         OctaneFuelDispenseManager OCD1 = new OctaneFuelDispenseManager(1, ocd1.dispenserqueue, "Car and Van", "Octane", true, OctaneFuelAtRepo,totalpetrol,450);
 
 

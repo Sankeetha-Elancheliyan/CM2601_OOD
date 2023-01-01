@@ -73,18 +73,21 @@ public class OctaneFuelDispenseManager implements FuelDispenseManager, Runnable 
 
     @Override
     public void run() {
-        //Check availabilitu
-        System.out.println(availableOctane);
-        //dispense
-        System.out.println("Octane Supplied");
-        //Update
-        System.out.println("the ques is "+ queue);
-        //payment
-        System.out.println("the required fuels is "+queue.peek().getFuelamount());
-        //dequeue
-        while (!queue.isEmpty()) {
-            Customer customer = queue.poll();
-            System.out.println("poll from the queue :"+customer);
+        while (queue.size() > 0) {
+            //Check availability
+            System.out.println(availableOctane);
+            //dispense
+            System.out.println("Octane Supplied");
+            //Update
+            System.out.println("the ques is " + queue);
+            //payment
+            System.out.println("the required fuels is " + queue.peek().getFuelamount());
+            //dequeue
+            while (!queue.isEmpty()) {
+                System.out.println("the required fuels is for " + queue.peek().getName() + " is :" + queue.peek().getFuelamount());
+                Customer customer = queue.poll();
+                System.out.println("poll from the queue :" + customer);
+            }
         }
     }
 }
