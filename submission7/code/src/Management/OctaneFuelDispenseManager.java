@@ -1,22 +1,30 @@
 package Management;
 
-public class OctaneFuelDispenseManager implements FuelDispenseManager {
+import java.util.Queue;
 
-    private double fuelPumped,unitPrice,amount;
+public class OctaneFuelDispenseManager implements FuelDispenseManager, Runnable {
+
+    //private double fuelPumped,unitPrice,amount;
     private Operator operator;
-//    DateTime v = new DateTime();
-//    OctaneRepository OR1=new OctaneRepository(25000,25000,v,false,25000);
-//    OctaneFuelDispenseManager OD1=new OctaneFuelDispenseManager(500,450,200);
-//    OctaneFuelDispenseManager OD2=new OctaneFuelDispenseManager(500,450,200);
-//    OctaneFuelDispenseManager OD3=new OctaneFuelDispenseManager(500,450,200);
-//    OctaneFuelDispenseManager OD4=new OctaneFuelDispenseManager(500,450,200);
-//    ArrayList<OctaneFuelDispenseManager> listofdispensers=new ArrayList<OctaneFuelDispenseManager>();
+
+    private final Queue<Customer> queue;
+    private double fuelPumped,unitPrice,amount;
+    private int dispenserNumber;
+    private String fuelType;
+    private String vehicleType;
+    private boolean availability;
+    private  double availableOctane;
 
 
-    public OctaneFuelDispenseManager(double fuelPumped, double unitPrice) {
+    public OctaneFuelDispenseManager(int dispenserNumber, Queue<Customer> queue, String vehicleType,  String fuelType, boolean availability, double availableOctane, double fuelPumped, double unitPrice ) {
+        this.queue = queue;
         this.fuelPumped = fuelPumped;
         this.unitPrice = unitPrice;
-
+        this.dispenserNumber = dispenserNumber;
+        this.fuelType = fuelType;
+        this.vehicleType = vehicleType;
+        this.availability = availability;
+        this.availableOctane = availableOctane;
     }
 
     public double getFuelPumped() {
@@ -61,4 +69,22 @@ public class OctaneFuelDispenseManager implements FuelDispenseManager {
      public double petrolIncome(){
         return this.unitPrice*this.fuelPumped;
      }
+
+
+    @Override
+    public void run() {
+        //Check availabilitu
+        System.out.println(availableOctane);
+        //dispense
+        System.out.println("Octane Supplied");
+        //Update
+        System.out.println("the ques is "+ queue);
+        //payment
+        System.out.println("the required fuels is "+queue.peek().getFuelamount());
+        //dequeue
+        while (!queue.isEmpty()) {
+            Customer customer = queue.poll();
+            System.out.println("poll from the queue :"+customer);
+        }
+    }
 }
