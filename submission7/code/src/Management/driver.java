@@ -30,7 +30,7 @@ public class driver {
 
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws InterruptedException {
 
         Customer c1=new Customer("Ashvin","octane","Car",10);
         Customer c2=new Customer("vignesh","octane","Car",5);
@@ -403,12 +403,18 @@ public class driver {
         Thread serviceDD3 = new Thread(DD3);
         serviceDD3.start();
 
+        serviceOCD1.join();
+        serviceOCD2.join();
+        serviceOCD3.join();
+        serviceOCD4.join();
+        serviceDD1.join();
+        serviceDD2.join();
+        serviceDD3.join();
 
-
+        System.out.println("This is the end");
 
         CentralRepository centralRepo = new CentralRepository();
         centralRepo.printStats();
-
 
     }
 
