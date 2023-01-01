@@ -5,6 +5,13 @@ import java.util.Queue;
 
 public class DispenserQueue {
     Queue <Customer> dispenserqueue = new LinkedList<Customer>();
+
+
+        //    public DispenserQueue(Queue dispenserqueue) {
+//        this.dispenserqueue = dispenserqueue;
+//    }
+
+
     public void iterateUsingEnhancedForLoop(Queue<Customer> linkedList)
     {
 
@@ -20,10 +27,6 @@ public class DispenserQueue {
         }
         System.out.println("--------------------------------------------");
     }
-
-        //    public DispenserQueue(Queue dispenserqueue) {
-//        this.dispenserqueue = dispenserqueue;
-//    }
         public boolean addQueue(Customer c) {
             if (dispenserqueue.size() < 10) {
                 return dispenserqueue.add(c);
@@ -53,6 +56,10 @@ public class DispenserQueue {
 //    public Queue getDispenserqueue() {
 //        return dispenserqueue;
 //    }
+
+
+
+
 //
 }
 
