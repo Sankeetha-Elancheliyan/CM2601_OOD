@@ -1,34 +1,29 @@
 package Management;
 
+import java.util.Queue;
+
 public class DieselFuelDispenseManager implements FuelDispenseManager, Runnable{
 //    private double fuelPumped,unitPrice,amount;
 
-    private double fuelPumped;
-    private double unitPrice;
-    private double amount;
+    private final Queue<Customer> queue;
+    private double fuelPumped,unitPrice,amount;
     private int dispenserNumber;
     private String fuelType;
     private String vehicleType;
     private boolean availability;
+    private  double availableDiesel;
 
-    public DieselFuelDispenseManager(int i, String vehicles, String d, boolean b) {
-        this.dispenserNumber = i;
-        this.fuelType = d;
-        this.vehicleType = vehicles;
-        this.availability = b;
+    public DieselFuelDispenseManager(int dispenserNumber, Queue<Customer> queue, String vehicleType,  String fuelType, boolean availability, double availableDiesel, double fuelPumped, double unitPrice ) {
+        this.queue = queue;
+        this.fuelPumped = fuelPumped;
+        this.unitPrice = unitPrice;
+        this.dispenserNumber = dispenserNumber;
+        this.fuelType = fuelType;
+        this.vehicleType = vehicleType;
+        this.availability = availability;
+        this.availableDiesel = availableDiesel;
     }
 
-
-
-//    public DieselFuelDispenseManager(double fuelPumped, double unitPrice, double amount) {
-//        this.fuelPumped = fuelPumped;
-//        this.unitPrice = unitPrice;
-//        this.amount = amount;
-//    }
-    public DieselFuelDispenseManager(double fuelPumped,double unitPrice){
-        this.unitPrice=unitPrice;
-        this.fuelPumped=fuelPumped;
-    }
 
     public double getFuelPumped() {
         return fuelPumped;
@@ -75,11 +70,23 @@ public class DieselFuelDispenseManager implements FuelDispenseManager, Runnable{
 
     @Override
     public void run() {
-        //Check availabilitu
-        //dispense
-        System.out.println("Diesel Supplied");
-        //Update
-        //payment
-        //dequeue
+
+        while (queue.size() > 0) {
+            //Check availabilitu
+            System.out.println(availableDiesel);
+            //dispense
+            System.out.println("Diesel Supplied");
+            //Update
+            System.out.println("the ques is "+ queue);
+            //payment
+            System.out.println("the required fuels is for "+ queue.peek().getName() +" is :"+queue.peek().getFuelamount());
+            //dequeue
+            while (!queue.isEmpty()) {
+                System.out.println("the required fuels is for "+ queue.peek().getName() +" is :"+queue.peek().getFuelamount());
+                Customer customer = queue.poll();
+                System.out.println("poll from the queue :"+customer);
+            }
+        }
+
     }
 }

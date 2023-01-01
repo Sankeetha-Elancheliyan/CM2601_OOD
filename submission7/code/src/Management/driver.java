@@ -1,9 +1,6 @@
 package Management;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.SQLOutput;
-import java.sql.Statement;
 import java.util.Collection;
 import java.util.List;
 
@@ -61,6 +58,11 @@ public class driver {
         OctaneRepository octanerepo = new OctaneRepository(25000,25000,v,false,25000);
         DieselRepository dieselrepo = new DieselRepository(25000,25000,v,false, 25000);
 
+        double fuelatdeiselrepo = dieselrepo.getAvailableFuel();
+        System.out.println("avilable fuel: "+ fuelatdeiselrepo);
+
+
+
 /////////////////////////////////////////////////////////////////
 
         DispenserQueue ocd1 = new DispenserQueue();
@@ -101,6 +103,26 @@ public class driver {
 
 
 
+//
+//
+//        try {
+//            Connection conn = DriverManager.getConnection(DB_URL, USER, PASS);
+//            String sql = "INSERT INTO `payment` (`paymentId`, `paymentType`, `paymentValue`, `customer`,`operator`)"
+//                    + "VALUES('" + p1.getPaymentId() + "','" + p1.getPaymentType()
+//                    + "','" +  p1.getPaymentValue()
+//                    + "'," + p1.getCustomer().getName()
+//                    + "','" +p1.getOperator().getOp_id()+")";
+//            Statement stmt = conn.createStatement();
+//            int j = stmt.executeUpdate(sql);
+//            if (j > 0) {
+//                System.out.println("ROW INSERTED");
+//            } else {
+//                System.out.println("ROW NOT INSERTED");
+//            }
+//        } catch (Exception e) {
+//            System.out.println(e);
+//        }
+
 
         Collection<Customer> listcustomers= List.of(c1,c2,c3,c4,c5,c6,c7,c8,c9,c10,c11,c12,c13,c14,c15,c16,c17,c18,c19,c20,c21,c22);
 
@@ -110,7 +132,6 @@ public class driver {
 //        for(Customer c: listcustomers){
 //            System.out.println(c);
 //        }
-
 
 
 
@@ -163,7 +184,6 @@ public class driver {
                     commonQueue.commonqueue.add(c);
 
                 }
-
             }
              else if((c.getFuelType().equals("octane") && (c.getVehicleType().equals("Motorbike")))){
                 if(ocd4.dispenserqueue.size()<10){
@@ -192,7 +212,7 @@ public class driver {
             //if other type disel vechile adding to the shortest dispenser
             else if(c.getFuelType().equals("diesel") && (c.getVehicleType().equals("Other"))){
 
-                if (dd2.dispenserqueue.size() < dd3.dispenserqueue.size() || dd2.dispenserqueue.size() < 10) {
+                if (dd2.dispenserqueue.size() < dd3.dispenserqueue.size() && dd2.dispenserqueue.size() < 10) {
                     dd2.dispenserqueue.add(c);
                 } else if (dd2.dispenserqueue.size() > dd3.dispenserqueue.size() || dd3.dispenserqueue.size() < 10) {
                     dd3.dispenserqueue.add(c);
@@ -202,26 +222,25 @@ public class driver {
                     commonQueue.commonqueue.add(c);
                 }
             }
-
             else{
                 commonQueue.commonqueue.add(c);
             }
 
         }
 
+
+//        System.out.println("common queue: "+ commonQueue.commonqueue);
+//        System.out.println("OCD1: "+ocd1.dispenserqueue);
+//        System.out.println("OCD2: "+ocd2.dispenserqueue);
+//        System.out.println("OCD3: "+ocd3.dispenserqueue);
+//        System.out.println("OCD4: "+ocd4.dispenserqueue);
+//        System.out.println("DD1: "+dd1.dispenserqueue);
+//        System.out.println("DD2: "+dd2.dispenserqueue);
+//        System.out.println("DD3: "+dd3.dispenserqueue);
 //        for(Customer c: listcustomers){
 //            System.out.println(c);
 //        }
 
-
-//        System.out.println(ocd1.dispenserqueue);
-//        System.out.println(ocd2.dispenserqueue);
-//        System.out.println(ocd3.dispenserqueue);
-//        System.out.println(ocd4.dispenserqueue);
-//        System.out.println(dd1.dispenserqueue);
-//        System.out.println(dd2.dispenserqueue);
-//        System.out.println(dd3.dispenserqueue);
-//
         System.out.println("Available slots in Dispenserqueue 1 :"+(10-ocd1.dispenserqueue.size()));
         System.out.println("Available slots in Dispenserqueue 2 :"+(10-ocd2.dispenserqueue.size()));
         System.out.println("Available slots in Dispenserqueue 3 :"+(10-ocd3.dispenserqueue.size()));
@@ -234,29 +253,6 @@ public class driver {
         System.out.println("common queue: "+ commonQueue.commonqueue);
 //        ocd1.addQueue()
 
-
-
-        // adding customers to database and removing from the queue
-        for(Customer c: listcustomers){
-            try {
-                Connection conn = DriverManager.getConnection(DB_URL, USER, PASS);
-                String sql = "INSERT INTO `customer` (`Name`, `FuelType`, `VehicleType`, `Amount`)"
-                        + "VALUES('" + c.getName() + "','" + c.getFuelType()
-                        + "','" +  c.getVehicleType() + "'," + c.getFuelamount()  + ")";
-                Statement stmt = conn.createStatement();
-                System.out.println(ocd1.dispenserqueue.poll()+"  removed");
-
-                int j = stmt.executeUpdate(sql);
-                if (j > 0) {
-                    System.out.println("ROW INSERTED");
-                    Thread.sleep(2000);
-                } else {
-                    System.out.println("ROW NOT INSERTED");
-                }
-            } catch (Exception e) {
-                System.out.println(e);
-            }
-        }
 
 
         Collection<Payment> payments =List.of(p1,p2);
@@ -320,13 +316,17 @@ public class driver {
                 cus = c;
             }
         }
+        // octaneFuelDispenseManager=new OctaneFuelDispenseManager(totalpetrol,450);
+        //DieselFuelDispenseManager dieselFuelDispenseManager =new DieselFuelDispenseManager(totaldiesel,430);
+
+        double DieselFuelAtRepo = dieselrepo.getAvailableFuel();
+        double OctaneFuelAtRepo = octanerepo.getAvailableFuel();
+        DieselFuelDispenseManager DD2 = new DieselFuelDispenseManager(6, dd2.dispenserqueue, "other vehicles", "Diesel", true, DieselFuelAtRepo,totaldiesel,430);
+        OctaneFuelDispenseManager OCD1 = new OctaneFuelDispenseManager(1, ocd1.dispenserqueue, "Car and Van", "Octane", true, OctaneFuelAtRepo,totalpetrol,450);
 
 
-        OctaneFuelDispenseManager octaneFuelDispenseManager=new OctaneFuelDispenseManager(totalpetrol,450);
-        DieselFuelDispenseManager dieselFuelDispenseManager =new DieselFuelDispenseManager(totaldiesel,430);
-
-        System.out.println("\npetrol income "+octaneFuelDispenseManager.petrolIncome()+"rs");
-        System.out.println("diesel income "+dieselFuelDispenseManager.dieselIncome()+"rs");
+        System.out.println("\npetrol income "+OCD1.petrolIncome()+"rs");
+        System.out.println("diesel income "+DD2.dieselIncome()+"rs");
         System.out.println("\nLargest amount of the fuel amount of the day :"+max+"L. \nDetails -:"+cus);
 
         double availbalefuelpetrol =octanerepo.getAvailableFuel()-totalpetrol;
@@ -334,42 +334,50 @@ public class driver {
         System.out.println("\nAvailable fuel in octane repository :"+ availbalefuelpetrol+"l");
         System.out.println("Available fuel in diesel repository :"+ availbalefueldiesel+"l");
 
-        double DieselFuelAtRepo = dieselrepo.getAvailableFuel();
-        DieselFuelDispenseManager DD1 = new DieselFuelDispenseManager(5, "public transport vehicles", "Diesel", true);
-        DieselFuelDispenseManager DD2 = new DieselFuelDispenseManager(6, "other vehicles", "Diesel", true);
-        DieselFuelDispenseManager DD3 = new DieselFuelDispenseManager(7, "other vehicles", "Diesel", true);
+//        Thread serviceDd3;
+//        while(dd1.dispenserqueue.size() > 0) {
+//            serviceDd3 = new Thread(DD1);
+//            serviceDd3.start();
+//        }
 
-        Thread serviceDd3;
-        while(dd1.dispenserqueue.size() > 0) {
-            serviceDd3 = new Thread(DD1);
-            serviceDd3.start();
-        }
+//        while(dd2.dispenserqueue.size() > 0) {
+//            Thread serviceDd2 = new Thread(DD2);
+//            serviceDd2.start();
+//        }
 
-        while(dd2.dispenserqueue.size() > 0) {
-            serviceDd3 = new Thread(DD2);
-            serviceDd3.start();
-        }
-
-        while(dd3.dispenserqueue.size() > 0) {
-            serviceDd3 = new Thread(DD3);
-            serviceDd3.start();
-        }
+//        while(dd3.dispenserqueue.size() > 0) {
+//            serviceDd3 = new Thread(DD3);
+//            serviceDd3.start();
+//        }
 
 
+//        while (dd1.dispenserqueue.size()>0) {
+//            Thread serviceDd1 = new Thread(DD1);
+//            serviceDd1.start();
+//        }
 
-        System.out.println(c1);
+            Thread serviceDd2 = new Thread(DD2);
+            serviceDd2.start();
+            System.out.println("the queue in driver class:" +dd2.dispenserqueue);
+
+//        while (dd3.dispenserqueue.size()>0) {
+//            Thread serviceDd3 = new Thread(DD3);
+//            serviceDd3.start();
+//        }
+
+//        Thread serviceDd3 = new Thread(DD3);
+//        serviceDd3.start();
+//        Thread serviceDd2 = new Thread(DD2);
+//        serviceDd2.start();
+
         System.out.println("common queue: "+ commonQueue.commonqueue);
-
-        System.out.println(ocd1.dispenserqueue);
-        System.out.println(ocd2.dispenserqueue);
-        System.out.println(ocd3.dispenserqueue);
-        System.out.println(ocd4.dispenserqueue);
-        System.out.println(dd1.dispenserqueue);
-        System.out.println(dd2.dispenserqueue);
-        System.out.println(dd3.dispenserqueue);
+        System.out.println("OCD1: "+ocd1.dispenserqueue);
+        System.out.println("OCD2: "+ocd2.dispenserqueue);
+        System.out.println("OCD3: "+ocd3.dispenserqueue);
+        System.out.println("OCD4: "+ocd4.dispenserqueue);
+        System.out.println("DD1: "+dd1.dispenserqueue);
+        System.out.println("DD2: "+dd2.dispenserqueue);
+        System.out.println("DD3: "+dd3.dispenserqueue);
     }
-
-
-
 
 }

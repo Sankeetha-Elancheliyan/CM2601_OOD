@@ -4,7 +4,7 @@ import java.util.LinkedList;
 import java.util.Queue;
 
 public class DispenserQueue {
-    Queue dispenserqueue=new LinkedList();
+    Queue <Customer> dispenserqueue = new LinkedList<Customer>();
 
 
         //    public DispenserQueue(Queue dispenserqueue) {
