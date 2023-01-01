@@ -1,6 +1,9 @@
 package Management;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
 import java.sql.SQLOutput;
+import java.sql.Statement;
 import java.util.Collection;
 import java.util.List;
 
@@ -97,26 +100,6 @@ public class driver {
         Payment p2 =new Payment("card",2000,c1,op1);
 
 
-
-//
-//
-//        try {
-//            Connection conn = DriverManager.getConnection(DB_URL, USER, PASS);
-//            String sql = "INSERT INTO `payment` (`paymentId`, `paymentType`, `paymentValue`, `customer`,`operator`)"
-//                    + "VALUES('" + p1.getPaymentId() + "','" + p1.getPaymentType()
-//                    + "','" +  p1.getPaymentValue()
-//                    + "'," + p1.getCustomer().getName()
-//                    + "','" +p1.getOperator().getOp_id()+")";
-//            Statement stmt = conn.createStatement();
-//            int j = stmt.executeUpdate(sql);
-//            if (j > 0) {
-//                System.out.println("ROW INSERTED");
-//            } else {
-//                System.out.println("ROW NOT INSERTED");
-//            }
-//        } catch (Exception e) {
-//            System.out.println(e);
-//        }
 
 
         Collection<Customer> listcustomers= List.of(c1,c2,c3,c4,c5,c6,c7,c8,c9,c10,c11,c12,c13,c14,c15,c16,c17,c18,c19,c20,c21,c22);
@@ -229,11 +212,7 @@ public class driver {
 //        for(Customer c: listcustomers){
 //            System.out.println(c);
 //        }
-//        System.out.println(ocd1);
-//        System.out.println(ocd2);
-//        System.out.println(ocd3);
-//        System.out.println(ocd4);
-//        System.out.println(commonQueue);
+
 
 //        System.out.println(ocd1.dispenserqueue);
 //        System.out.println(ocd2.dispenserqueue);
@@ -255,6 +234,29 @@ public class driver {
         System.out.println("common queue: "+ commonQueue.commonqueue);
 //        ocd1.addQueue()
 
+
+
+        // adding customers to database and removing from the queue
+        for(Customer c: listcustomers){
+            try {
+                Connection conn = DriverManager.getConnection(DB_URL, USER, PASS);
+                String sql = "INSERT INTO `customer` (`Name`, `FuelType`, `VehicleType`, `Amount`)"
+                        + "VALUES('" + c.getName() + "','" + c.getFuelType()
+                        + "','" +  c.getVehicleType() + "'," + c.getFuelamount()  + ")";
+                Statement stmt = conn.createStatement();
+                System.out.println(ocd1.dispenserqueue.poll()+"  removed");
+
+                int j = stmt.executeUpdate(sql);
+                if (j > 0) {
+                    System.out.println("ROW INSERTED");
+                    Thread.sleep(2000);
+                } else {
+                    System.out.println("ROW NOT INSERTED");
+                }
+            } catch (Exception e) {
+                System.out.println(e);
+            }
+        }
 
 
         Collection<Payment> payments =List.of(p1,p2);
@@ -318,6 +320,8 @@ public class driver {
                 cus = c;
             }
         }
+
+
         OctaneFuelDispenseManager octaneFuelDispenseManager=new OctaneFuelDispenseManager(totalpetrol,450);
         DieselFuelDispenseManager dieselFuelDispenseManager =new DieselFuelDispenseManager(totaldiesel,430);
 
