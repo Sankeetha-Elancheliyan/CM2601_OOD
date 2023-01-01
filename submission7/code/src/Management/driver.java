@@ -346,8 +346,7 @@ public class driver {
 
         System.out.printf("%1s %5s %5s %11s","Car","Van","motorbike","threewheeler\n");
         System.out.format("%1s %5s %5s %10s ",totalCar,totalVan,totalmotorbike,totalthreewheeler);
-        // octaneFuelDispenseManager=new OctaneFuelDispenseManager(totalpetrol,450);
-        //DieselFuelDispenseManager dieselFuelDispenseManager =new DieselFuelDispenseManager(totaldiesel,430);
+
 
         Operator op1 = new Operator("David");
         Operator op2 = new Operator("Vitor");
@@ -404,17 +403,6 @@ public class driver {
         Thread serviceDD3 = new Thread(DD3);
         serviceDD3.start();
 
-            //System.out.println("the queue in driver class:" +dd2.dispenserqueue);
-
-//        while (dd3.dispenserqueue.size()>0) {
-//            Thread serviceDd3 = new Thread(DD3);
-//            serviceDd3.start();
-//        }
-
-//        Thread serviceDd3 = new Thread(DD3);
-//        serviceDd3.start();
-//        Thread serviceDd2 = new Thread(DD2);
-//        serviceDd2.start();
 
 
 

@@ -82,74 +82,63 @@ public class OctaneFuelDispenseManager implements FuelDispenseManager, Runnable 
     public void run() {
         while (queue.size() > 0) {
             Object lock = new Object();
-            //Check availability
-            //Synchronizing to ensure concurrent behaviour
+            // synchronize concurrent behavior
             synchronized (lock) {
                 if (availableOctane > 500) {
-
-                    //dispense
+                    // dispense fuel and update available octane
                     availableOctane -= queue.peek().getFuelamount();
-                    System.out.println("Octane Supplied of "+queue.peek().getFuelamount()+"L remaining fuel at repository is: "+ availableOctane);
+                    System.out.println("Octane Supplied of " + queue.peek().getFuelamount() + "L remaining fuel at repository is: " + availableOctane);
 
-                    //payment
+                    // handle payment
                     cash_amount_for_dispence = queue.peek().getFuelamount() * unitPrice;
                     System.out.println("The operator " + operator.getName() + "of id " + operator.getOp_id() + " handled Rs."+ cash_amount_for_dispence +".");
 
-                    //Updating database
-                    //System.out.println("the ques is " + queue);
+                    // update database with customer information
                     try {
                         Connection con = DriverManager.getConnection(
                                 "jdbc:mysql://localhost:3306/Petrol_Station_Queue_Management", "admin", "admin"
                         );
-                        // Create a prepared statement with an INSERT query
+                        // create prepared statement with insert query
                         String sql = "INSERT INTO customer (name, fuelType, vehicleType, amount) VALUES (?, ?, ?, ?)";
                         PreparedStatement stmt = con.prepareStatement(sql);
-                        // Set the values of the placeholders
+                        // set values of placeholders
                         stmt.setString(1, queue.peek().getName());
                         stmt.setString(2, queue.peek().getFuelType());
                         stmt.setString(3, queue.peek().getVehicleType());
                         stmt.setInt(4, queue.peek().getFuelamount());
-                        // Serialize the object to a byte array
+                        // serialize object to byte array
                         ByteArrayOutputStream baos = new ByteArrayOutputStream();
                         ObjectOutputStream oos = new ObjectOutputStream(baos);
                         oos.writeObject(queue.peek());
                         byte[] data = baos.toByteArray();
-                        // Set the prepared statement's parameter to the serialized object
+                        // set prepared statement's parameter to serialized object
                         stmt.setObject(1, data[0]);
                         stmt.setObject(2, data[1]);
                         stmt.setObject(3, data[2]);
                         stmt.setObject(4, data[3]);
-//                        stmt.setString(1, queue.peek().getName());
-//                        stmt.setString(2, queue.peek().getFuelType());
-//                        stmt.setString(3, queue.peek().getVehicleType());
-//                        stmt.setInt(4, queue.peek().getFuelamount());
-
-                        // Execute the prepared statement
+                        // execute prepared statement
                         stmt.executeUpdate();
-                        // Close the streams and connection
+                        // close streams and connection
                         oos.close();
                         baos.close();
                         stmt.close();
                         con.close();
-
                     } catch (Exception e) {
                         System.out.println(e);
                     }
 
-                    //dequeue
+                    // dequeue customer
                     System.out.println("the required fuels is for " + queue.peek().getName() + " is :" + queue.peek().getFuelamount());
                     Customer customer = queue.poll();
                     System.out.println("Following customer dispensed :" + customer);
                     System.out.println("\n\n");
-
                 } else {
-                    // stop supply
+                    // stop fuel supply and break loop
                     stopPumping();
                     System.out.println("The dispenser " + dispenserNumber + " unavailable until restock");
                     break;
                 }
             }
         }
-
     }
 }
