@@ -1,6 +1,8 @@
 package Management;
 
-public class Customer {
+import java.io.Serializable;
+
+public class Customer implements Serializable {
     private String name, fuelType,VehicleType;
     private int fuelamount;
     //cmt
