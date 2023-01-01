@@ -490,6 +490,5 @@ public class driver {
 //    SELECT fuelType, vehicleType
 //    FROM customer
 //    WHERE amount = (SELECT MAX(amount) FROM customer)
-//cmt
 
 }
