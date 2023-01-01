@@ -3,7 +3,10 @@ package Management;
 import java.io.ByteArrayInputStream;
 import java.io.ObjectInputStream;
 import java.sql.*;
-import java.util.*;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.LinkedList;
+import java.util.List;
 
 
 import java.sql.*;
@@ -32,11 +35,11 @@ public class driver {
         Customer c1=new Customer("Ashvin","octane","Car",10);
         Customer c2=new Customer("vignesh","octane","Car",5);
 //        Customer c2=new Customer("kumaru","octane","Van",15);
-        Customer c3=new Customer("SaniyanSakada","octane","Motorbike",9);
-        Customer c4=new Customer("PattasuBallu","octane","Threewheeler",3);
-        Customer c5=new Customer("MottaRajendran","octane","Car",16);
-        Customer c6=new Customer("PaanPaarakuRavi","octane","Car",2);
-        Customer c7=new Customer("PaanPaarakuRavi","octane","Car",14);
+        Customer c3=new Customer("Sakada","octane","Motorbike",9);
+        Customer c4=new Customer("suBallu","octane","Threewheeler",3);
+        Customer c5=new Customer("jendran","octane","Car",16);
+        Customer c6=new Customer("Ravi","octane","Car",2);
+        Customer c7=new Customer("Ravi","octane","Car",14);
         Customer c8=new Customer("Ashvin","octane","Car",20);
         Customer c9=new Customer("kumaru","octane","Van",13);
         Customer c10=new Customer("Ashvin","octane","Car",8);
@@ -135,7 +138,7 @@ public class driver {
 //        }
 
 
-        //Collection<Customer> listcustomers= List.of(c1,c2,c3,c4,c5,c6,c7,c8,c9,c10,c11,c12,c13,c14,c15,c16,c17,c18,c19,c20,c21,c22);
+//        Collection<Customer> listcustomers= List.of(c1,c2,c3,c4,c5,c6,c7,c8,c9,c10,c11,c12,c13,c14,c15,c16,c17,c18,c19,c20,c21,c22);
 
         LinkedList<Customer> listcustomers = new LinkedList<Customer>();
         Collections.addAll(listcustomers,c1,c2,c3,c4,c5,c6,c7,c8,c9,c10,c11,c12,c13,c14,c15,c16,c17,c18,c19,c20,c21,c22);
@@ -220,6 +223,25 @@ public class driver {
             }
 
         }
+        System.out.printf("%78s\n", "\033[1mDISPLAY AVAILABLE SLOTS");
+        System.out.printf("%5s %11s %12s %12s %12s %12s %12s", "| Dispenserqueue 1 |", "Dispenserqueue 2 |", "Dispenserqueue 3 |", "Dispenserqueue 4 |","Dispenserqueue 5 |","Dispenserqueue 6 |","Dispenserqueue 7 |\n");
+        System.out.format("%8s %20s %17s %17s %18s %18s %19s",10-ocd1.dispenserqueue.size(),10-ocd2.dispenserqueue.size(),10-ocd3.dispenserqueue.size(),10-ocd4.dispenserqueue.size(),10-dd1.dispenserqueue.size(),10-dd2.dispenserqueue.size(),10-dd3.dispenserqueue.size() );
+        System.out.println("\n\n           \033[1mDisplaying Dispenser 1 ");
+        ocd1.iterateUsingEnhancedForLoop(ocd1.dispenserqueue);
+        System.out.println("\n          \033[1mDisplaying Dispenser 2 ");
+        ocd1.iterateUsingEnhancedForLoop(ocd2.dispenserqueue);
+        System.out.println("\n          \033[1mDisplaying Dispenser 3 ");
+        ocd1.iterateUsingEnhancedForLoop(ocd3.dispenserqueue);
+        System.out.println("\n          \033[1mDisplaying Dispenser 4 ");
+        ocd1.iterateUsingEnhancedForLoop(ocd4.dispenserqueue);
+        System.out.println("\n          \033[1mDisplaying Dispenser 5 ");
+        ocd1.iterateUsingEnhancedForLoop(dd1.dispenserqueue);
+        System.out.println("\n          \033[1mDisplaying Dispenser 6 ");
+        ocd1.iterateUsingEnhancedForLoop(dd2.dispenserqueue);
+
+
+
+
 
 //        for(Customer c: listcustomers){
 //            try {
@@ -254,7 +276,7 @@ public class driver {
         //double totalpayments= getrevenue(payments);
         //System.out.println("\nTotal Payments :"+totalpayments+"rs\n");
 
-        System.out.println("Statistics for fuel by fuel type \n");
+        System.out.println("\n \033[1m Statistics for fuel by fuel type \n");
         double totalpetrol=0;
         for(Customer c: listcustomers){
             if(c.getFuelType().equals("octane")){
@@ -271,7 +293,7 @@ public class driver {
         }
         System.out.println("Total Petrol fuel liters :"+totaldiesel+" l");
 
-        System.out.println("\nStatistics for fuel by vehicle type \n");
+        System.out.println("\n \033[1mStatistics for fuel by vehicle type \n");
         int totalCar=0;
         for(Customer c: listcustomers){
             if(c.getVehicleType().equals("Car")){

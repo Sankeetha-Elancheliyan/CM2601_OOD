@@ -13,7 +13,7 @@ public class DispenserQueue {
      */
     public void iterateUsingEnhancedForLoop(Queue<Customer> linkedList) {
         System.out.println("--------------------------------------------");
-        System.out.printf("%5s %11s %12s %12s ", "Name", "FuelType", "VehicleType", "FuelAmount");
+        System.out.printf("%1s %11s %13s %13s ", "Name", "FuelType", "VehicleType", "FuelAmount");
         System.out.println();
         System.out.println("--------------------------------------------");
         for (Customer listElement : linkedList) {
