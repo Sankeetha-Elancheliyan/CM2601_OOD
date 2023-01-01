@@ -127,6 +127,11 @@ public class DieselFuelDispenseManager implements FuelDispenseManager, Runnable 
                         stmt.setObject(2, data[1]);
                         stmt.setObject(3, data[2]);
                         stmt.setObject(4, data[3]);
+//                        stmt.setString(1, queue.peek().getName());
+//                        stmt.setString(2, queue.peek().getFuelType());
+//                        stmt.setString(3, queue.peek().getVehicleType());
+//                        stmt.setInt(4, queue.peek().getFuelamount());
+
                         // Execute the prepared statement
                         stmt.executeUpdate();
                         // Close the streams and connection

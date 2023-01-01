@@ -2,6 +2,7 @@ package Management;
 
 import java.io.ByteArrayInputStream;
 import java.io.ObjectInputStream;
+import java.math.BigDecimal;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -61,42 +62,86 @@ public class CentralRepository {
 
 
 
-//    public void printStats(){
-//        try {
-//            Connection con = DriverManager.getConnection(
-//                    "jdbc:mysql://localhost:3306/Petrol_Station_Queue_Management", "new", "sankee"
-//            );
-//            // Create a prepared statement with an INSERT query
-//            String sql = "SELECT fuelType, vehicleType FROM customer WHERE amount = (SELECT MAX(amount) FROM customer)";
-//            PreparedStatement stmt = con.prepareStatement(sql);
-//            // Execute the query and get the result set
-//            ResultSet rs = stmt.executeQuery();
-//            // Iterate through the result set
-//            while (rs.next()) {
-//                // Retrieve the serialized data from the result set
-//                byte[] data = (byte[]) rs.getObject(1);
-//
-//                // Use an ObjectInputStream to deserialize the data
-//                ObjectInputStream ois = new ObjectInputStream(new ByteArrayInputStream(data));
-//
-//                // Read the object from the stream and cast it to the appropriate type
-//                Customer customer = (Customer) ois.readObject();
-//
-//                // Close the stream
-//                ois.close();
-//
-//                // Use the deserialized object as needed
-//                System.out.println("The Vehicle type which recieved the highest amount of fuel: "+ customer.getVehicleType());
-//                System.out.println("The Fuel type they got: "+ customer.getFuelType());
-//            }
-//            // Close the result set, statement, and connection
-//            rs.close();
-//            stmt.close();
-//            con.close();
-//
-//        } catch (Exception e) {
-//            System.out.println(e);
-//        }
+
+    // To print Stats for the day
+
+    public void printStats() {
+
+        // prints total fuel dispensed per day by all the dispensers
+        try {
+            Connection con = DriverManager.getConnection(
+                    "jdbc:mysql://localhost:3306/Petrol_Station_Queue_Management", "new", "sankee"
+            );
+            // SQL statement
+            String sql = "SELECT SUM(amount) AS total_fuel FROM customer ";
+            PreparedStatement stmt = con.prepareStatement(sql);
+            // query
+            ResultSet rs = stmt.executeQuery();
+            // Iterate
+            while (rs.next()) {
+                // Retrieve
+                BigDecimal totalFuel = rs.getBigDecimal("total_fuel");
+
+                System.out.println(" total fuel dispensed by all the dispensers: " + totalFuel);
+            }
+            // Close
+            rs.close();
+            stmt.close();
+            con.close();
+
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+
+        //prints the vehicle type which received the highest amount of fuel
+        try {
+            Connection con = DriverManager.getConnection(
+                    "jdbc:mysql://localhost:3306/Petrol_Station_Queue_Management", "new", "sankee"
+            );
+            // Create a prepared statement with a SELECT query
+            String sql = "SELECT vehicleType FROM customer WHERE amount = (SELECT MAX(amount) FROM customer)";
+            PreparedStatement stmt = con.prepareStatement(sql);
+            // Execute the query and get the result set
+            ResultSet rs = stmt.executeQuery();
+            // Iterate through the result set
+            while (rs.next()) {
+                // Retrieve the fuel type as a string
+                String vehicleType = rs.getString(1);
+                System.out.println("The Vehicle type which received the highest amount of fuel: "+ vehicleType);
+            }
+            // Close the result set, statement, and connection
+            rs.close();
+            stmt.close();
+            con.close();
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+
+        //prints the fuel type which dispensed the highest amount
+        try {
+            Connection con = DriverManager.getConnection(
+                    "jdbc:mysql://localhost:3306/Petrol_Station_Queue_Management", "new", "sankee"
+            );
+            // Create a prepared statement with a SELECT query
+            String sql = "SELECT fuelType FROM customer WHERE amount = (SELECT MAX(amount) FROM customer)";
+            PreparedStatement stmt = con.prepareStatement(sql);
+            // Execute the query and get the result set
+            ResultSet rs = stmt.executeQuery();
+            // Iterate through the result set
+            while (rs.next()) {
+                // Retrieve the fuel type as a string
+                String fuelType = rs.getString(1);
+                System.out.println("The Fuel type which got dispensed highest: "+ fuelType);
+            }
+            // Close the result set, statement, and connection
+            rs.close();
+            stmt.close();
+            con.close();
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+    }
+
 
 }
 
