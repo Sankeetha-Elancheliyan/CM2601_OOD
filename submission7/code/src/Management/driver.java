@@ -67,10 +67,10 @@ public class driver {
         System.out.println();
         System.out.println(v);
         /////////////////////////////////////////////////
-        /////////
+
 
         OctaneRepository octanerepo = new OctaneRepository(25000,25000,v,false,25000);
-        DieselRepository dieselrepo = new DieselRepository(25000,25000,v,false, 600);
+        DieselRepository dieselrepo = new DieselRepository(25000,25000,v,false, 25000);
 
 
         double fuelatdeiselrepo = dieselrepo.getAvailableFuel();
@@ -143,8 +143,6 @@ public class driver {
         LinkedList<Customer> listcustomers = new LinkedList<Customer>();
         Collections.addAll(listcustomers,c1,c2,c3,c4,c5,c6,c7,c8,c9,c10,c11,c12,c13,c14,c15,c16,c17,c18,c19,c20,c21,c22);
 
-
-//        before adding customers
 
 
 //      adding customers
@@ -266,9 +264,9 @@ public class driver {
 
 
 
-        System.out.println("Common queue length :"+ commonQueue.commonqueue.size());
-        System.out.println("common queue: "+ commonQueue.commonqueue);
-//        ocd1.addQueue()
+        System.out.println("Common Queue length: "+ commonQueue.commonqueue.size());
+        System.out.println("Common Queue: "+ commonQueue.commonqueue);
+
 
 
 
@@ -347,16 +345,19 @@ public class driver {
 
         double DieselFuelAtRepo = dieselrepo.getAvailableFuel();
         double OctaneFuelAtRepo = octanerepo.getAvailableFuel();
+
+        //creating octane fuel dispensers
         OctaneFuelDispenseManager OCD1 = new OctaneFuelDispenseManager(1, ocd1.dispenserqueue, "Car and Van", "Octane", true, OctaneFuelAtRepo,totalpetrol,450,op1);
         OctaneFuelDispenseManager OCD2 = new OctaneFuelDispenseManager(2, ocd2.dispenserqueue, "Car and Van and other vehicle", "Octane", true, OctaneFuelAtRepo,totalpetrol,450,op2);
         OctaneFuelDispenseManager OCD3 = new OctaneFuelDispenseManager(3, ocd3.dispenserqueue, "Threewheeler", "Octane", true, OctaneFuelAtRepo,totalpetrol,450,op3);
         OctaneFuelDispenseManager OCD4 = new OctaneFuelDispenseManager(4, ocd4.dispenserqueue, "Motorbikes", "Octane", true, OctaneFuelAtRepo,totalpetrol,450,op4);
 
+        //creating Diesel fuel dispensers
         DieselFuelDispenseManager DD1 = new DieselFuelDispenseManager(5, dd2.dispenserqueue, "Public transport vehicles", "Diesel", true, DieselFuelAtRepo,totaldiesel,430,op5);
         DieselFuelDispenseManager DD2 = new DieselFuelDispenseManager(6, dd2.dispenserqueue, "other vehicles", "Diesel", true, DieselFuelAtRepo,totaldiesel,430,op6);
         DieselFuelDispenseManager DD3 = new DieselFuelDispenseManager(7, dd2.dispenserqueue, "other vehicles", "Diesel", true, DieselFuelAtRepo,totaldiesel,430,op7);
 
-
+        //********* these code need to be rewritten ***********
         System.out.println("\npetrol income "+OCD1.petrolIncome()+"rs");
         System.out.println("diesel income "+DD2.dieselIncome()+"rs");
         System.out.println("\nLargest amount of the fuel amount of the day :"+max+"L. \nDetails -:"+cus);
@@ -366,30 +367,28 @@ public class driver {
         System.out.println("\nAvailable fuel in octane repository :"+ availbalefuelpetrol+"l");
         System.out.println("Available fuel in diesel repository :"+ availbalefueldiesel+"l");
 
-//        Thread serviceDd3;
-//        while(dd1.dispenserqueue.size() > 0) {
-//            serviceDd3 = new Thread(DD1);
-//            serviceDd3.start();
-//        }
 
-//        while(dd2.dispenserqueue.size() > 0) {
-//            Thread serviceDd2 = new Thread(DD2);
-//            serviceDd2.start();
-//        }
+        Thread serviceOCD1 = new Thread(OCD1);
+        serviceOCD1.start();
 
-//        while(dd3.dispenserqueue.size() > 0) {
-//            serviceDd3 = new Thread(DD3);
-//            serviceDd3.start();
-//        }
+        Thread serviceOCD2 = new Thread(OCD2);
+        serviceOCD2.start();
 
+        Thread serviceOCD3 = new Thread(OCD3);
+        serviceOCD3.start();
 
-//        while (dd1.dispenserqueue.size()>0) {
-//            Thread serviceDd1 = new Thread(DD1);
-//            serviceDd1.start();
-//        }
+        Thread serviceOCD4 = new Thread(OCD4);
+        serviceOCD4.start();
 
-            Thread serviceDd2 = new Thread(DD2);
-            serviceDd2.start();
+        Thread serviceDD1 = new Thread(DD1);
+        serviceDD1.start();
+
+        Thread serviceDD2 = new Thread(DD2);
+        serviceDD2.start();
+
+        Thread serviceDD3 = new Thread(DD3);
+        serviceDD3.start();
+
             //System.out.println("the queue in driver class:" +dd2.dispenserqueue);
 
 //        while (dd3.dispenserqueue.size()>0) {

@@ -21,7 +21,10 @@ public class DieselFuelDispenseManager implements FuelDispenseManager, Runnable 
     private String vehicleType;
     private boolean availability;
     private  double availableDiesel;
-    private double amount_for_dispence;
+    private double cash_amount_for_dispence;
+    private int severed_vechicle;
+
+    //private String variableName = "dispenser number";
 
     public DieselFuelDispenseManager(int dispenserNumber, Queue<Customer> queue, String vehicleType,  String fuelType, boolean availability, double availableDiesel, double fuelPumped, double unitPrice , Operator operator) {
         this.queue = queue;
@@ -93,18 +96,17 @@ public class DieselFuelDispenseManager implements FuelDispenseManager, Runnable 
             //Synchronizing to ensure concurrent behaviour
             synchronized (lock) {
                 if (availableDiesel > 500) {
-//                System.out.println(availableDiesel);
+
                     //dispense
-                    System.out.println("Diesel Supplied");
                     availableDiesel -= queue.peek().getFuelamount();
+                    System.out.println("Diesel Supplied of "+queue.peek().getFuelamount()+"L remaining fuel at repository is: "+ availableDiesel);
+
                     //payment
-                    System.out.println("The operator handling payment is " + operator.getName() + "\n the operator id is " + operator.getOp_id());
-                    amount_for_dispence = queue.peek().getFuelamount() * unitPrice;
-//                System.out.println("the required fuels is for " + queue.peek().getName() + " is :" + queue.peek().getFuelamount());
+                    cash_amount_for_dispence = queue.peek().getFuelamount() * unitPrice;
+                    System.out.println("The operator " + operator.getName() + "of id " + operator.getOp_id() + " handled Rs."+ cash_amount_for_dispence +".");
 
-                    //Update
-
-                    System.out.println("the ques is " + queue);
+                    //Updating database
+                    //System.out.println("the ques is " + queue);
                     try {
                         Connection con = DriverManager.getConnection(
                                 "jdbc:mysql://localhost:3306/Petrol_Station_Queue_Management", "admin", "admin"
@@ -147,14 +149,15 @@ public class DieselFuelDispenseManager implements FuelDispenseManager, Runnable 
                     //dequeue
                     System.out.println("the required fuels is for " + queue.peek().getName() + " is :" + queue.peek().getFuelamount());
                     Customer customer = queue.poll();
-                    System.out.println("poll from the queue :" + customer);
+                    System.out.println("Following customer dispensed :" + customer);
+                    System.out.println("\n");
+
                 } else {
                     // stop supply
                     stopPumping();
                     System.out.println("The dispenser " + dispenserNumber + " unavailable until restock");
                     break;
                 }
-
             }
         }
 
