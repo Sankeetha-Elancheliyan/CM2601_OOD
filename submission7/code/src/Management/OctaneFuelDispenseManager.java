@@ -16,7 +16,7 @@ public class OctaneFuelDispenseManager implements FuelDispenseManager, Runnable 
     private  double availableOctane;
 
 
-    public OctaneFuelDispenseManager(int dispenserNumber, Queue<Customer> queue, String vehicleType,  String fuelType, boolean availability, double availableOctane, double fuelPumped, double unitPrice ) {
+    public OctaneFuelDispenseManager(int dispenserNumber, Queue<Customer> queue, String vehicleType,  String fuelType, boolean availability, double availableOctane, double fuelPumped, double unitPrice,Operator operator ) {
         this.queue = queue;
         this.fuelPumped = fuelPumped;
         this.unitPrice = unitPrice;
@@ -25,6 +25,7 @@ public class OctaneFuelDispenseManager implements FuelDispenseManager, Runnable 
         this.vehicleType = vehicleType;
         this.availability = availability;
         this.availableOctane = availableOctane;
+        this.operator=operator;
     }
 
     public double getFuelPumped() {

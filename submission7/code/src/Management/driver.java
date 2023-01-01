@@ -110,10 +110,9 @@ public class driver {
 //        }
 
 
-        Operator op1=new Operator("nissan");
 
-        Payment p1 =new Payment("cash",5000,c1,op1);
-        Payment p2 =new Payment("card",2000,c1,op1);
+        //Payment p1 =new Payment("cash",5000,c1,op1);
+        //Payment p2 =new Payment("card",2000,c1,op1);
 
 
 
@@ -262,10 +261,6 @@ public class driver {
 //                System.out.println(e);
 //            }
 //        }
-
-
-
-
 //        System.out.println("common queue: "+ commonQueue.commonqueue);
 //        System.out.println("OCD1: "+ocd1.dispenserqueue);
 //        System.out.println("OCD2: "+ocd2.dispenserqueue);
@@ -292,9 +287,9 @@ public class driver {
 
 
 
-        Collection<Payment> payments =List.of(p1,p2);
-        double totalpayments= getrevenue(payments);
-        System.out.println("\nTotal Payments :"+totalpayments+"rs\n");
+        //Collection<Payment> payments =List.of(p1,p2);
+        //double totalpayments= getrevenue(payments);
+        //System.out.println("\nTotal Payments :"+totalpayments+"rs\n");
 
         System.out.println("Statistics for fuel by fuel type \n");
         double totalpetrol=0;
@@ -356,13 +351,25 @@ public class driver {
         // octaneFuelDispenseManager=new OctaneFuelDispenseManager(totalpetrol,450);
         //DieselFuelDispenseManager dieselFuelDispenseManager =new DieselFuelDispenseManager(totaldiesel,430);
 
-        Operator op = new Operator("Shobian");
+        Operator op1 = new Operator("David");
+        Operator op2 = new Operator("Vitor");
+        Operator op3 = new Operator("Viyak");
+        Operator op4 = new Operator("Pari");
+        Operator op5 = new Operator("Andrew");
+        Operator op6 = new Operator("John");
+        Operator op7 = new Operator("Tim");
 
 
         double DieselFuelAtRepo = dieselrepo.getAvailableFuel();
         double OctaneFuelAtRepo = octanerepo.getAvailableFuel();
-        DieselFuelDispenseManager DD2 = new DieselFuelDispenseManager(6, dd2.dispenserqueue, "other vehicles", "Diesel", true, DieselFuelAtRepo,totaldiesel,430,op);
-        OctaneFuelDispenseManager OCD1 = new OctaneFuelDispenseManager(1, ocd1.dispenserqueue, "Car and Van", "Octane", true, OctaneFuelAtRepo,totalpetrol,450);
+        OctaneFuelDispenseManager OCD1 = new OctaneFuelDispenseManager(1, ocd1.dispenserqueue, "Car and Van", "Octane", true, OctaneFuelAtRepo,totalpetrol,450,op1);
+        OctaneFuelDispenseManager OCD2 = new OctaneFuelDispenseManager(2, ocd2.dispenserqueue, "Car and Van and other vehicle", "Octane", true, OctaneFuelAtRepo,totalpetrol,450,op2);
+        OctaneFuelDispenseManager OCD3 = new OctaneFuelDispenseManager(3, ocd3.dispenserqueue, "Threewheeler", "Octane", true, OctaneFuelAtRepo,totalpetrol,450,op3);
+        OctaneFuelDispenseManager OCD4 = new OctaneFuelDispenseManager(4, ocd4.dispenserqueue, "Motorbikes", "Octane", true, OctaneFuelAtRepo,totalpetrol,450,op4);
+
+        DieselFuelDispenseManager DD1 = new DieselFuelDispenseManager(5, dd2.dispenserqueue, "Public transport vehicles", "Diesel", true, DieselFuelAtRepo,totaldiesel,430,op5);
+        DieselFuelDispenseManager DD2 = new DieselFuelDispenseManager(6, dd2.dispenserqueue, "other vehicles", "Diesel", true, DieselFuelAtRepo,totaldiesel,430,op6);
+        DieselFuelDispenseManager DD3 = new DieselFuelDispenseManager(7, dd2.dispenserqueue, "other vehicles", "Diesel", true, DieselFuelAtRepo,totaldiesel,430,op7);
 
 
         System.out.println("\npetrol income "+OCD1.petrolIncome()+"rs");

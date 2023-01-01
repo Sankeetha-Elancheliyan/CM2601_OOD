@@ -21,6 +21,7 @@ public class DieselFuelDispenseManager implements FuelDispenseManager, Runnable 
     private String vehicleType;
     private boolean availability;
     private  double availableDiesel;
+    private double amount_for_dispence;
 
     public DieselFuelDispenseManager(int dispenserNumber, Queue<Customer> queue, String vehicleType,  String fuelType, boolean availability, double availableDiesel, double fuelPumped, double unitPrice , Operator operator) {
         this.queue = queue;
@@ -98,6 +99,7 @@ public class DieselFuelDispenseManager implements FuelDispenseManager, Runnable 
                     availableDiesel -= queue.peek().getFuelamount();
                     //payment
                     System.out.println("The operator handling payment is " + operator.getName() + "\n the operator id is " + operator.getOp_id());
+                    amount_for_dispence = queue.peek().getFuelamount() * unitPrice;
 //                System.out.println("the required fuels is for " + queue.peek().getName() + " is :" + queue.peek().getFuelamount());
 
                     //Update
@@ -105,7 +107,7 @@ public class DieselFuelDispenseManager implements FuelDispenseManager, Runnable 
                     System.out.println("the ques is " + queue);
                     try {
                         Connection con = DriverManager.getConnection(
-                                "jdbc:mysql://localhost:3306/Petrol_Station_Queue_Management", "new", "sankee"
+                                "jdbc:mysql://localhost:3306/Petrol_Station_Queue_Management", "admin", "admin"
                         );
                         // Create a prepared statement with an INSERT query
                         String sql = "INSERT INTO customer (name, fuelType, vehicleType, amount) VALUES (?, ?, ?, ?)";
