@@ -281,7 +281,7 @@ public class driver {
                 totalpetrol+=c.getFuelamount();
             }
         }
-        System.out.println("Total Diesel fuel liters :"+totalpetrol+" l");
+//        System.out.println("Total petrol fuel liters :"+totalpetrol+" l");
 
         int totaldiesel=0;
         for(Customer c: listcustomers){
@@ -289,8 +289,10 @@ public class driver {
                 totaldiesel+=c.getFuelamount();
             }
         }
-        System.out.println("Total Petrol fuel liters :"+totaldiesel+" l");
+//        System.out.println("Total diesel fuel liters :"+totaldiesel+" l");
 
+        System.out.printf("%5s %11s ","Diesel","Petrol\n");
+        System.out.format("%1s %10s",totaldiesel,totalpetrol);
         System.out.println("\n \033[1mStatistics for fuel by vehicle type \n");
         int totalCar=0;
         for(Customer c: listcustomers){
@@ -298,7 +300,7 @@ public class driver {
                 totalCar+=c.getFuelamount();
             }
         }
-        System.out.println("Total Car fuel liters :"+totalCar+" l");
+//        System.out.println("Total Car fuel liters :"+totalCar+" l");
 
         int totalVan=0;
         for(Customer c: listcustomers){
@@ -306,21 +308,21 @@ public class driver {
                 totalVan+=c.getFuelamount();
             }
         }
-        System.out.println("Total Van fuel liters :"+totalVan+" l");
+//        System.out.println("Total Van fuel liters :"+totalVan+" l");
         int totalmotorbike=0;
         for(Customer c: listcustomers){
             if(c.getVehicleType().equals("Motorbike")){
                 totalmotorbike+=c.getFuelamount();
             }
         }
-        System.out.println("Total Motorbike fuel liters :"+totalmotorbike+" l");
+//        System.out.println("Total Motorbike fuel liters :"+totalmotorbike+" l");
         int totalthreewheeler=0;
         for(Customer c: listcustomers){
             if(c.getVehicleType().equals("Threewheeler")){
                 totalthreewheeler+=c.getFuelamount();
             }
         }
-        System.out.println("Total Threewheeler fuel liters :"+totalthreewheeler+" l");
+//        System.out.println("Total Threewheeler fuel liters :"+totalthreewheeler+" l");
         int max=0;
         Object cus=0;
         for(Customer c: listcustomers){
@@ -331,6 +333,9 @@ public class driver {
                 cus = c;
             }
         }
+
+        System.out.printf("%1s %5s %5s %11s","Car","Van","motorbike","threewheeler\n");
+        System.out.format("%1s %5s %5s %10s ",totalCar,totalVan,totalmotorbike,totalthreewheeler);
         // octaneFuelDispenseManager=new OctaneFuelDispenseManager(totalpetrol,450);
         //DieselFuelDispenseManager dieselFuelDispenseManager =new DieselFuelDispenseManager(totaldiesel,430);
 
