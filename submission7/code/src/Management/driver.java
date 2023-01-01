@@ -56,6 +56,16 @@ public class driver {
         Customer c21 =new Customer("rrr","octane","Other",10);
         Customer c22 =new Customer("Songimonkey","diesel","PublicTransport",18);
 
+        Customer c23 =new Customer("jjjj","octane","Car",10);
+        Customer c24 =new Customer("oooo","octane","Car",10);
+        Customer c25 =new Customer("pppp","octane","Car",10);
+        Customer c26 =new Customer("rrr","octane","Other",10);
+
+        Customer c27 =new Customer("jjjj","octane","Car",10);
+        Customer c28 =new Customer("oooo","octane","Car",10);
+        Customer c29 =new Customer("pppp","octane","Car",10);
+        Customer c30 =new Customer("rrr","octane","Other",10);
+
 ////////////////////////////////////////////////////////////////////////////////////////////////
         ////file test commit added here
 
@@ -141,7 +151,7 @@ public class driver {
 //        Collection<Customer> listcustomers= List.of(c1,c2,c3,c4,c5,c6,c7,c8,c9,c10,c11,c12,c13,c14,c15,c16,c17,c18,c19,c20,c21,c22);
 
         LinkedList<Customer> listcustomers = new LinkedList<Customer>();
-        Collections.addAll(listcustomers,c1,c2,c3,c4,c5,c6,c7,c8,c9,c10,c11,c12,c13,c14,c15,c16,c17,c18,c19,c20,c21,c22);
+        Collections.addAll(listcustomers,c1,c2,c3,c4,c5,c6,c7,c8,c9,c10,c11,c12,c13,c14,c15,c16,c17,c18,c19,c20,c21,c22,c23,c24,c25,c26,c27,c28,c29,c30);
 
 
 
