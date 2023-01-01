@@ -143,17 +143,7 @@ public class driver {
 
 
 //        before adding customers
-        System.out.println("\nInitial Slots");
-        System.out.println("Available slots in Dispenser queue 1 :"+(10-ocd1.dispenserqueue.size()));
-        System.out.println("Available slots in Dispenser queue 2 :"+(10-ocd2.dispenserqueue.size()));
-        System.out.println("Available slots in Dispenser queue 3 :"+(10-ocd3.dispenserqueue.size()));
-        System.out.println("Available slots in Dispenser queue 4 :"+(10-ocd4.dispenserqueue.size()));
-        System.out.println("Available slots in Dispenser queue 5 :"+(10-dd1.dispenserqueue.size()));
-        System.out.println("Available slots in Dispenser queue 6 :"+(10-dd2.dispenserqueue.size()));
-        System.out.println("Available slots in Dispenser queue 7 :"+(10-dd3.dispenserqueue.size()));
 
-        System.out.println("Common queue length :"+ commonQueue.commonqueue.size());
-        System.out.println(commonQueue.commonqueue+"\n");
 
 //      adding customers
         for(Customer c: listcustomers){
