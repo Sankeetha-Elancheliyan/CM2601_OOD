@@ -4,8 +4,8 @@ import java.util.LinkedList;
 import java.util.Queue;
 
 public class DispenserQueue {
-    // Queue to store customers waiting to use a dispenser
-    Queue<Customer> dispenserqueue = new LinkedList<>();
+    // queue to store customers waiting to use a dispenser
+    Queue<Customer> dispenserqueue = new LinkedList<Customer>();
 
     /**
      * Iterates through the given queue and prints the details of each customer
@@ -17,7 +17,7 @@ public class DispenserQueue {
         System.out.println();
         System.out.println("--------------------------------------------");
         for (Customer listElement : linkedList) {
-            System.out.format("%5s %7s %12s %12s", listElement.getName(), listElement.getFuelType(), listElement.getVehicleType(), listElement.getFuelamount());
+            System.out.format("%5s %7s %12s %12s",listElement.getName(),listElement.getFuelamount(),listElement.getVehicleType(),listElement.getFuelamount() );
             System.out.println();
         }
         System.out.println("--------------------------------------------");
@@ -60,7 +60,7 @@ public class DispenserQueue {
     /**
      * Displays the number of available slots in the dispenser queue
      */
-    public void displayAvailableSlots() {
+    public void displayavailableSlots() {
         System.out.println(dispenserqueue.size());
     }
 }
