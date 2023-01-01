@@ -3,16 +3,19 @@ package Management;
 import java.io.Serializable;
 
 public class Customer implements Serializable {
-    private String name, fuelType,VehicleType;
-    private int fuelamount;
-    //cmt
-    public Customer(String name, String fuelType, String vehicleType, int fuelamount) {
+    // Fields to store the customer's name, fuel type, vehicle type, and fuel amount
+    private String name, fuelType, VehicleType;
+    private int fuelAmount;
+
+    // Constructor to initialize the fields when a Customer object is created
+    public Customer(String name, String fuelType, String vehicleType, int fuelAmount) {
         this.name = name;
         this.fuelType = fuelType;
-        VehicleType = vehicleType;
-        this.fuelamount = fuelamount;
+        this.VehicleType = vehicleType;
+        this.fuelAmount = fuelAmount;
     }
 
+    // Getters and setters for each field
     public String getName() {
         return name;
     }
@@ -34,18 +37,19 @@ public class Customer implements Serializable {
     }
 
     public void setVehicleType(String vehicleType) {
-        VehicleType = vehicleType;
+        this.VehicleType = vehicleType;
     }
 
     public int getFuelamount() {
-        return fuelamount;
+        return fuelAmount;
     }
 
-    public void setFuelamount(int fuelamount) {
-        this.fuelamount = fuelamount;
+    public void setFuelAmount(int fuelAmount) {
+        this.fuelAmount = fuelAmount;
     }
-    public String toString()
-    {
-        return "Customer {"+name+"-"+fuelType+"-"+VehicleType+"-"+fuelamount+"}";
+
+    // toString method to create a string representation of a Customer object
+    public String toString() {
+        return "Customer {" + name + "-" + fuelType + "-" + VehicleType + "-" + fuelAmount + "}";
     }
 }

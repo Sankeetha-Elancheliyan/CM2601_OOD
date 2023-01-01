@@ -3,8 +3,7 @@ package Management;
 import java.io.ByteArrayInputStream;
 import java.io.ObjectInputStream;
 import java.sql.*;
-import java.util.Collection;
-import java.util.List;
+import java.util.*;
 
 
 import java.sql.*;
@@ -12,7 +11,6 @@ import java.io.*;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
-import java.util.Queue;
 
 import java.sql.SQLOutput;
 import java.sql.Statement;
@@ -137,9 +135,10 @@ public class driver {
 //        }
 
 
-        Collection<Customer> listcustomers= List.of(c1,c2,c3,c4,c5,c6,c7,c8,c9,c10,c11,c12,c13,c14,c15,c16,c17,c18,c19,c20,c21,c22);
+        //Collection<Customer> listcustomers= List.of(c1,c2,c3,c4,c5,c6,c7,c8,c9,c10,c11,c12,c13,c14,c15,c16,c17,c18,c19,c20,c21,c22);
 
-
+        LinkedList<Customer> listcustomers = new LinkedList<Customer>();
+        Collections.addAll(listcustomers,c1,c2,c3,c4,c5,c6,c7,c8,c9,c10,c11,c12,c13,c14,c15,c16,c17,c18,c19,c20,c21,c22);
 
 //        before adding customers
 

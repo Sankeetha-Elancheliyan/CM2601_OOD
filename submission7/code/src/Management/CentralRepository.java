@@ -7,37 +7,59 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
+
 public class CentralRepository {
-    private double StockAmount;
-    private double Capacity;
+    // Field to store the current amount of fuel in the repository
+    private double stockAmount;
+
+    // Field to store the capacity of the repository
+    private double capacity;
+
+    // Field to store the current date and time
     private DateTime dateTime;
+
+    // Field to store whether the repository is a 500L tank or not
     private boolean is500L;
 
+    /**
+     * Constructor for CentralRepository
+     * @param stockAmount current amount of fuel in the repository
+     * @param capacity capacity of the repository
+     * @param datetime current date and time
+     * @param is500L whether the repository is a 500L tank or not
+     */
     public CentralRepository(double stockAmount, double capacity, DateTime datetime, boolean is500L) {
-        StockAmount = stockAmount;
-        Capacity = capacity;
-        this.dateTime=datetime;
+        this.stockAmount = stockAmount;
+        this.capacity = capacity;
+        this.dateTime = datetime;
         this.is500L = is500L;
     }
 
+    /**
+     * Default constructor for CentralRepository
+     * Initializes stockAmount and capacity to 50000
+     */
     public CentralRepository() {
-        StockAmount=50000;
-        Capacity=50000;
+        this.stockAmount = 50000;
+        this.capacity = 50000;
     }
 
-
-
+    // Getter and setter for the stockAmount field
     public double getStockAmount() {
-        return StockAmount;
+        return stockAmount;
     }
 
     public void setStockAmount(double stockAmount) {
-        StockAmount = stockAmount;
+        this.stockAmount = stockAmount;
+
     }
 
-    public boolean stopPumping(){
+    // Method to stop pumping fuel from the repository
+    public boolean stopPumping() {
         return is500L;
     }
+
+
 
 //    public void printStats(){
 //        try {
@@ -75,5 +97,6 @@ public class CentralRepository {
 //        } catch (Exception e) {
 //            System.out.println(e);
 //        }
-    }
+
+}
 

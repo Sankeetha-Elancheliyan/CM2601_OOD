@@ -3,32 +3,28 @@ package Management;
 import java.util.LinkedList;
 
 public class CommonQueue {
-    LinkedList commonqueue=new LinkedList();
+    // Linked list to store customers in the queue
+    LinkedList<Customer> commonqueue = new LinkedList<>();
 
-    private int NumberInQueue;
+    // Field to store the number of customers in the queue
+    private int numberInQueue;
 
-
-//    public CommonQueue(LinkedList commonqueue,int numberInQueue) {
-//        this.commonqueue = commonqueue;
-//        NumberInQueue = numberInQueue;
-//    }
-
-
-
-    public boolean addQueue(Customer c){
+    // Method to add a customer to the queue
+    public boolean addQueue(Customer c) {
         return commonqueue.add(c);
     }
 
-    public boolean removeQueue(Customer c){
+    // Method to remove a customer from the queue
+    public boolean removeQueue(Customer c) {
         return commonqueue.remove(c);
     }
+
+    // Getter and setter for the numberInQueue field
     public int getNumberInQueue() {
-        return NumberInQueue;
+        return numberInQueue;
     }
 
     public void setNumberInQueue(int numberInQueue) {
-        NumberInQueue = numberInQueue;
+        this.numberInQueue = numberInQueue;
     }
-
-
 }
