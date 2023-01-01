@@ -481,5 +481,4 @@ public class driver {
 //    FROM customer
 //    WHERE amount = (SELECT MAX(amount) FROM customer)
 
-
 }
