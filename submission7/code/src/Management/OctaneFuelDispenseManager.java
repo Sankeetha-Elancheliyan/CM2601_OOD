@@ -89,7 +89,7 @@ public class OctaneFuelDispenseManager implements FuelDispenseManager, Runnable 
 
                     //dispense
                     availableOctane -= queue.peek().getFuelamount();
-                    System.out.println("Diesel Supplied of "+queue.peek().getFuelamount()+"L remaining fuel at repository is: "+ availableOctane);
+                    System.out.println("Octane Supplied of "+queue.peek().getFuelamount()+"L remaining fuel at repository is: "+ availableOctane);
 
                     //payment
                     cash_amount_for_dispence = queue.peek().getFuelamount() * unitPrice;
