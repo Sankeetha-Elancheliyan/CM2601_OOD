@@ -334,9 +334,12 @@ public class driver {
         }
 //        System.out.println("Total diesel fuel liters :"+totaldiesel+" l");
 
-        System.out.printf("%5s %11s ", "Diesel", "Petrol\n");
-        System.out.format("%1s %10s", totaldiesel, totalpetrol);
-        System.out.println("\n \033[1mStatistics for fuel by vehicle type \n");
+        System.out.println("\n \033[1m___Statistics for fuel by fuel type___ \n");
+        System.out.println(" ---------------------");
+        System.out.printf("%5s %11s "," | Diesel |","Petrol |\n");
+        System.out.println("--------------------- ");
+        System.out.format("%7s %12s",totaldiesel,totalpetrol);
+        System.out.println("\n ---------------------");
         int totalCar = 0;
         for (Customer c : listcustomers) {
             if (c.getVehicleType().equals("Car")) {
@@ -376,8 +379,13 @@ public class driver {
             }
         }
 
-        System.out.printf("%1s %5s %5s %11s", "Car", "Van", "motorbike", "threewheeler\n");
-        System.out.format("%1s %5s %5s %10s ", totalCar, totalVan, totalmotorbike, totalthreewheeler);
+        System.out.println("\033[1m___Statistics for fuel by vehicle type___ \n");
+        System.out.println(" -------------------------------------------");
+        System.out.printf("%1s %5s %5s %11s","| Car |","| Van |","| motorbike |","| threewheeler |\n");
+        System.out.println(" -------------------------------------------");
+
+        System.out.format("%5s %6s %10s %13s ",totalCar,totalVan,totalmotorbike,totalthreewheeler);
+        System.out.println(" \n-------------------------------------------");
 
 
         Operator op1 = new Operator("David");
