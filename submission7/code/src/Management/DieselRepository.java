@@ -9,12 +9,6 @@ public class DieselRepository extends CentralRepository {
 
     /**
      * Constructor to create a new DieselRepository with the given details and list of diesel dispensers
-     * @param stockAmount initial stock amount of fuel in the repository
-     * @param capacity maximum capacity of the repository
-     * @param datetime date and time the repository was created
-     * @param is500L whether the repository is for 500L tanks or not
-     * @param availableFuel initial available fuel in the repository
-     * @param listOfDieselDispenser list of diesel dispensers associated with the repository
      */
     public DieselRepository(double stockAmount, double capacity, DateTime datetime, boolean is500L, double availableFuel, ArrayList<DieselFuelDispenseManager> listOfDieselDispenser) {
         super(stockAmount, capacity, datetime, is500L);
@@ -40,11 +34,6 @@ public class DieselRepository extends CentralRepository {
 
     /**
      * Constructor to create a new DieselRepository with the given details
-     * @param stockAmount initial stock amount of fuel in the repository
-     * @param capacity maximum capacity of the repository
-     * @param datetime date and time the repository was created
-     * @param is500L whether the repository is for 500L tanks or not
-     * @param availableFuel initial available fuel in the repository
      */
     public DieselRepository(double stockAmount, double capacity, DateTime datetime, boolean is500L, double availableFuel) {
         super(stockAmount, capacity, datetime, is500L);
@@ -61,7 +50,6 @@ public class DieselRepository extends CentralRepository {
 
     /**
      * Sets the available fuel in the repository
-     * @param availableFuel available fuel to set for the repository
      */
     public void setAvailableFuel(double availableFuel) {
         this.availableFuel = availableFuel;

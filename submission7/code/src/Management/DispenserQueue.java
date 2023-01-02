@@ -9,7 +9,6 @@ public class DispenserQueue {
 
     /**
      * Iterates through the given queue and prints the details of each customer
-     * @param linkedList queue to iterate through
      */
     public void iterateUsingEnhancedForLoop(Queue<Customer> linkedList) {
         System.out.println("--------------------------------------------");
@@ -25,7 +24,6 @@ public class DispenserQueue {
 
     /**
      * Adds a customer to the dispenser queue if there is space available
-     * @param c customer to add to the queue
      * @return true if customer was added, false if queue is full
      */
     public boolean addQueue(Customer c) {
@@ -38,7 +36,6 @@ public class DispenserQueue {
 
     /**
      * Adds a customer to the dispenser queue if there is space available
-     * @param c customer to add to the queue
      */
     public void addQ(Customer c) {
         if (dispenserqueue.size() < 10) {
@@ -50,7 +47,6 @@ public class DispenserQueue {
 
     /**
      * Removes a customer from the dispenser queue
-     * @param c customer to remove from the queue
      * @return true if customer was removed, false if customer was not found in the queue
      */
     public boolean removeQueue(Customer c) {

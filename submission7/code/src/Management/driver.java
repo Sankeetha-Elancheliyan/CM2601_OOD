@@ -100,49 +100,6 @@ public class driver {
 
         CommonQueue commonQueue = new CommonQueue();
 
-//        for(int i=0;i<ocd1.dispenserqueue.size();i++){
-//            try {
-//                Connection conn = DriverManager.getConnection(DB_URL, USER, PASS);
-//                String sql = "INSERT INTO `customer` (`Name`, `FuelType`, `VehicleType`, `Amount`)"
-//                        + "VALUES('" + c20.getName() + "','" + c20.getFuelType()
-//                        + "','" +  c20.getVehicleType() + "'," + c20.getFuelamount()  + ")";
-//                Statement stmt = conn.createStatement();
-//                int j = stmt.executeUpdate(sql);
-//                if (j > 0) {
-//                    System.out.println("ROW INSERTED");
-//                } else {
-//                    System.out.println("ROW NOT INSERTED");
-//                }
-//            } catch (Exception e) {
-//                System.out.println(e);
-//            }
-//            ocd1.dispenserqueue.remove();
-//        }
-
-
-        //Payment p1 =new Payment("cash",5000,c1,op1);
-        //Payment p2 =new Payment("card",2000,c1,op1);
-
-
-//
-//
-//        try {
-//            Connection conn = DriverManager.getConnection(DB_URL, USER, PASS);
-//            String sql = "INSERT INTO `payment` (`paymentId`, `paymentType`, `paymentValue`, `customer`,`operator`)"
-//                    + "VALUES('" + p1.getPaymentId() + "','" + p1.getPaymentType()
-//                    + "','" +  p1.getPaymentValue()
-//                    + "'," + p1.getCustomer().getName()
-//                    + "','" +p1.getOperator().getOp_id()+")";
-//            Statement stmt = conn.createStatement();
-//            int j = stmt.executeUpdate(sql);
-//            if (j > 0) {
-//                System.out.println("ROW INSERTED");
-//            } else {
-//                System.out.println("ROW NOT INSERTED");
-//            }
-//        } catch (Exception e) {
-//            System.out.println(e);
-//        }
 
 
 //        Collection<Customer> listcustomers= List.of(c1,c2,c3,c4,c5,c6,c7,c8,c9,c10,c11,c12,c13,c14,c15,c16,c17,c18,c19,c20,c21,c22);
@@ -194,16 +151,6 @@ public class driver {
             } else if (c.getFuelType().equals("diesel") && (c.getVehicleType().equals("PublicTransport"))) {
 
                 if (dd1.dispenserqueue.size() < 10) {
-//                    // Dequeue a customer from the common queue and add it to the specific queue
-//                    for (int i = 0; i < commonQueue.commonqueue.size(); i++) {
-//                        Customer currentCustomer = commonQueue.commonqueue.get(i);
-//                        if (currentCustomer.getFuelType().equals("diesel") && currentCustomer.getVehicleType().equals("PublicTransport")) {
-//                            dd1.dispenserqueue.add(currentCustomer);
-//                            commonQueue.commonqueue.remove(i);
-//                            break;
-//                        } else if (dd1.dispenserqueue.size() < 10) {
-//                        dd1.dispenserqueue.add(c);
-//                        }
                     dd1.dispenserqueue.add(c);
                 }else{
                     System.out.println(" DD1 Queue full");
@@ -287,35 +234,11 @@ public class driver {
         ocd1.iterateUsingEnhancedForLoop(dd2.dispenserqueue);
 
 
-//        for(Customer c: listcustomers){
-//            try {
-//                Connection conn = DriverManager.getConnection(DB_URL, USER, PASS);
-//                String sql = "INSERT INTO `customer` (`Name`, `FuelType`, `VehicleType`, `Amount`)"
-//                        + "VALUES('" + c.getName() + "','" + c.getFuelType()
-//                        + "','" +  c.getVehicleType() + "'," + c.getFuelamount()  + ")";
-//                Statement stmt = conn.createStatement();
-//                System.out.println(ocd1.dispenserqueue.poll()+"  removed");
-//
-//                int j = stmt.executeUpdate(sql);
-//                if (j > 0) {
-//                    System.out.println("ROW INSERTED");
-//                    Thread.sleep(2000);
-//                } else {
-//                    System.out.println("ROW NOT INSERTED");
-//                }
-//            } catch (Exception e) {
-//                System.out.println(e);
-//            }
-//        }
-
 
         System.out.println("Common Queue length: " + commonQueue.commonqueue.size());
         System.out.println("Common Queue: " + commonQueue.commonqueue);
 
 
-        //Collection<Payment> payments =List.of(p1,p2);
-        //double totalpayments= getrevenue(payments);
-        //System.out.println("\nTotal Payments :"+totalpayments+"rs\n");
 
         System.out.println("\n \033[1m Statistics for fuel by fuel type \n");
         double totalpetrol = 0;
