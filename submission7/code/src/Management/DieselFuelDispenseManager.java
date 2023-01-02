@@ -158,20 +158,22 @@ public class DieselFuelDispenseManager implements FuelDispenseManager, Runnable 
                             queue.add(currentCustomer);
                             commonQueue.commonqueue.remove(i);
                             break;
-                        } else if (dispenserNumber == 6) {
-                            if (currentCustomer.getFuelType().equals("diesel") && currentCustomer.getVehicleType().equals("Other")) {
-                                queue.add(currentCustomer);
-                                commonQueue.commonqueue.remove(i);
-                                break;
-                            }
-                        } else {
+                        }
+                    }else if (dispenserNumber == 6) {
                             if (currentCustomer.getFuelType().equals("diesel") && currentCustomer.getVehicleType().equals("Other")) {
                                 queue.add(currentCustomer);
                                 commonQueue.commonqueue.remove(i);
                                 break;
                             }
                         }
-                    }
+                    else {
+                            if (currentCustomer.getFuelType().equals("diesel") && currentCustomer.getVehicleType().equals("Other")) {
+                                queue.add(currentCustomer);
+                                commonQueue.commonqueue.remove(i);
+                                break;
+                            }
+                        }
+
                 }
             }else{
                     // stop fuel supply and break loop

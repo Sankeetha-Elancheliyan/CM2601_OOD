@@ -161,26 +161,29 @@ public class OctaneFuelDispenseManager implements FuelDispenseManager, Runnable 
                             queue.add(currentCustomer);
                             commonQueue.commonqueue.remove(i);
                             break;
-                        } else if (dispenserNumber == 2) {
-                            if (currentCustomer.getFuelType().equals("octane") && currentCustomer.getVehicleType().equals("Car") || currentCustomer.getFuelType().equals("octane") && currentCustomer.getVehicleType().equals("Van") || currentCustomer.getFuelType().equals("octane") && currentCustomer.getVehicleType().equals("Other")) {
-                                queue.add(currentCustomer);
-                                commonQueue.commonqueue.remove(i);
-                                break;
-                            } else if (dispenserNumber == 3) {
-                                if (currentCustomer.getFuelType().equals("octane") && currentCustomer.getVehicleType().equals("Threewheeler")) {
-                                    queue.add(currentCustomer);
-                                    commonQueue.commonqueue.remove(i);
-                                    break;
-                                } else if (dispenserNumber == 4) {
+                        }
+                    } else if (dispenserNumber == 2) {
+                        if (currentCustomer.getFuelType().equals("octane") && currentCustomer.getVehicleType().equals("Car") || currentCustomer.getFuelType().equals("octane") && currentCustomer.getVehicleType().equals("Van") || currentCustomer.getFuelType().equals("octane") && currentCustomer.getVehicleType().equals("Other")) {
+                            queue.add(currentCustomer);
+                            commonQueue.commonqueue.remove(i);
+                            break;
+                        }
+                    }else if (dispenserNumber == 3) {
+                        if (currentCustomer.getFuelType().equals("octane") && currentCustomer.getVehicleType().equals("Threewheeler")) {
+                            queue.add(currentCustomer);
+                            commonQueue.commonqueue.remove(i);
+                            break;
+                        }
+                    }else if (dispenserNumber == 4) {
                                     if (currentCustomer.getFuelType().equals("octane") && currentCustomer.getVehicleType().equals("Motorbike")) {
                                         queue.add(currentCustomer);
                                         commonQueue.commonqueue.remove(i);
-                                        break;
                                     }
-                                }
-                            }
-                        }
                     }
+
+
+
+
                 }
 
             }else {

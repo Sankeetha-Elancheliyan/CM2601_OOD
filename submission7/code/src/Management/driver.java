@@ -63,7 +63,7 @@ public class driver {
 
         Customer c27 = new Customer("jjjj", "octane", "Car", 10);
         Customer c28 = new Customer("oooo", "octane", "Car", 10);
-        Customer c29 = new Customer("pppp", "octane", "Car", 10);
+        Customer c29 = new Customer("pppp", "octane", "Other", 10);
         Customer c30 = new Customer("rrr", "octane", "Other", 10);
 
 ////////////////////////////////////////////////////////////////////////////////////////////////
@@ -330,9 +330,9 @@ public class driver {
         OctaneFuelDispenseManager OCD4 = new OctaneFuelDispenseManager(4, ocd4.dispenserqueue, "Motorbikes", "Octane", true, OctaneFuelAtRepo, totalpetrol, 450, op4, commonQueue);
 
         //creating Diesel fuel dispensers
-        DieselFuelDispenseManager DD1 = new DieselFuelDispenseManager(5, dd2.dispenserqueue, "Public transport vehicles", "Diesel", true, DieselFuelAtRepo, totaldiesel, 430, op5, commonQueue);
+        DieselFuelDispenseManager DD1 = new DieselFuelDispenseManager(5, dd1.dispenserqueue, "Public transport vehicles", "Diesel", true, DieselFuelAtRepo, totaldiesel, 430, op5, commonQueue);
         DieselFuelDispenseManager DD2 = new DieselFuelDispenseManager(6, dd2.dispenserqueue, "other vehicles", "Diesel", true, DieselFuelAtRepo, totaldiesel, 430, op6, commonQueue);
-        DieselFuelDispenseManager DD3 = new DieselFuelDispenseManager(7, dd2.dispenserqueue, "other vehicles", "Diesel", true, DieselFuelAtRepo, totaldiesel, 430, op7, commonQueue);
+        DieselFuelDispenseManager DD3 = new DieselFuelDispenseManager(7, dd3.dispenserqueue, "other vehicles", "Diesel", true, DieselFuelAtRepo, totaldiesel, 430, op7, commonQueue);
 
         //********* these code need to be rewritten ***********
         System.out.println("\nTotal Petrol income Rs. " + OCD1.petrolIncome());
@@ -379,7 +379,14 @@ public class driver {
         CentralRepository centralRepo = new CentralRepository();
         centralRepo.printStats();
 
-
+        System.out.println("the final ocd1 queue:"+ ocd1.dispenserqueue);
+        System.out.println("the final ocd2 queue:"+ ocd2.dispenserqueue);
+        System.out.println("the final ocd3 queue:"+ ocd3.dispenserqueue);
+        System.out.println("the final ocd4 queue:"+ ocd4.dispenserqueue);
+        System.out.println("the final dd1 queue:"+ dd1.dispenserqueue);
+        System.out.println("the final dd2 queue:"+ dd2.dispenserqueue);
+        System.out.println("the final dd3 queue:"+ dd3.dispenserqueue);
+        System.out.println("the final common queue:"+ commonQueue.commonqueue);
 
     }
 }
