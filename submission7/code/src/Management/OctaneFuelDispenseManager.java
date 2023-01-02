@@ -20,9 +20,11 @@ public class OctaneFuelDispenseManager implements FuelDispenseManager, Runnable 
     private boolean availability;
     private  double availableOctane;
     private double cash_amount_for_dispence;
+    private Customer customer;
+    private CommonQueue commonQueue;
 
 
-    public OctaneFuelDispenseManager(int dispenserNumber, Queue<Customer> queue, String vehicleType,  String fuelType, boolean availability, double availableOctane, double fuelPumped, double unitPrice,Operator operator ) {
+    public OctaneFuelDispenseManager(int dispenserNumber, Queue<Customer> queue, String vehicleType,  String fuelType, boolean availability, double availableOctane, double fuelPumped, double unitPrice,Operator operator, CommonQueue commonQueue ) {
         this.queue = queue;
         this.fuelPumped = fuelPumped;
         this.unitPrice = unitPrice;
@@ -32,6 +34,7 @@ public class OctaneFuelDispenseManager implements FuelDispenseManager, Runnable 
         this.availability = availability;
         this.availableOctane = availableOctane;
         this.operator=operator;
+        this.commonQueue = commonQueue;
     }
 
     public double getFuelPumped() {
@@ -86,7 +89,7 @@ public class OctaneFuelDispenseManager implements FuelDispenseManager, Runnable 
 
 
     @Override
-    public void run(int threadNumber) {
+    public void run() {
         while (queue.size() > 0) {
             Object lock = new Object();
             //Check availability
@@ -155,38 +158,39 @@ public class OctaneFuelDispenseManager implements FuelDispenseManager, Runnable 
                 //check the common queue and add
                 for (int i = 0; i < commonQueue.commonqueue.size(); i++) {
                     Customer currentCustomer = commonQueue.commonqueue.get(i);
-                    if (threadNumber == 1) {
+                    if (dispenserNumber == 1) {
                         if (currentCustomer.getFuelType().equals("octane") && currentCustomer.getVehicleType().equals("Car") || currentCustomer.getFuelType().equals("octane") && currentCustomer.getVehicleType().equals("Van")) {
                             queue.add(currentCustomer);
                             commonQueue.commonqueue.remove(i);
                             break;
-                        } else if (threadNumber == 2) {
+                        } else if (dispenserNumber == 2) {
                             if (currentCustomer.getFuelType().equals("octane") && currentCustomer.getVehicleType().equals("Car") || currentCustomer.getFuelType().equals("octane") && currentCustomer.getVehicleType().equals("Van") || currentCustomer.getFuelType().equals("octane") && currentCustomer.getVehicleType().equals("Other")) {
                                 queue.add(currentCustomer);
                                 commonQueue.commonqueue.remove(i);
                                 break;
-                            } else if (threadNumber == 3) {
+                            } else if (dispenserNumber == 3) {
                                 if (currentCustomer.getFuelType().equals("octane") && currentCustomer.getVehicleType().equals("Threewheeler")) {
                                     queue.add(currentCustomer);
                                     commonQueue.commonqueue.remove(i);
                                     break;
-                                } else if (threadNumber == 4) {
+                                } else if (dispenserNumber == 4) {
                                     if (currentCustomer.getFuelType().equals("octane") && currentCustomer.getVehicleType().equals("Motorbike")) {
                                         queue.add(currentCustomer);
                                         commonQueue.commonqueue.remove(i);
                                         break;
                                     }
-
-                                } else {
-                                    // stop supply
-                                    stopPumping();
-                                    System.out.println("The dispenser " + dispenserNumber + " unavailable until restock");
-                                    break;
                                 }
                             }
                         }
                     }
                 }
+
+            }else {
+                // stop supply
+                stopPumping();
+                System.out.println("The dispenser " + dispenserNumber + " unavailable until restock");
+                break;
             }
         }
     }
+}

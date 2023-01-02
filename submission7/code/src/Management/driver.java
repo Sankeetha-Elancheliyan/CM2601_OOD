@@ -393,15 +393,15 @@ public class driver {
         double OctaneFuelAtRepo = octanerepo.getAvailableFuel();
 
         //creating octane fuel dispensers
-        OctaneFuelDispenseManager OCD1 = new OctaneFuelDispenseManager(1, ocd1.dispenserqueue, "Car and Van", "Octane", true, OctaneFuelAtRepo, totalpetrol, 450, op1);
-        OctaneFuelDispenseManager OCD2 = new OctaneFuelDispenseManager(2, ocd2.dispenserqueue, "Car and Van and other vehicle", "Octane", true, OctaneFuelAtRepo, totalpetrol, 450, op2);
-        OctaneFuelDispenseManager OCD3 = new OctaneFuelDispenseManager(3, ocd3.dispenserqueue, "Threewheeler", "Octane", true, OctaneFuelAtRepo, totalpetrol, 450, op3);
-        OctaneFuelDispenseManager OCD4 = new OctaneFuelDispenseManager(4, ocd4.dispenserqueue, "Motorbikes", "Octane", true, OctaneFuelAtRepo, totalpetrol, 450, op4);
+        OctaneFuelDispenseManager OCD1 = new OctaneFuelDispenseManager(1, ocd1.dispenserqueue, "Car and Van", "Octane", true, OctaneFuelAtRepo, totalpetrol, 450, op1, commonQueue);
+        OctaneFuelDispenseManager OCD2 = new OctaneFuelDispenseManager(2, ocd2.dispenserqueue, "Car and Van and other vehicle", "Octane", true, OctaneFuelAtRepo, totalpetrol, 450, op2, commonQueue);
+        OctaneFuelDispenseManager OCD3 = new OctaneFuelDispenseManager(3, ocd3.dispenserqueue, "Threewheeler", "Octane", true, OctaneFuelAtRepo, totalpetrol, 450, op3, commonQueue);
+        OctaneFuelDispenseManager OCD4 = new OctaneFuelDispenseManager(4, ocd4.dispenserqueue, "Motorbikes", "Octane", true, OctaneFuelAtRepo, totalpetrol, 450, op4, commonQueue);
 
         //creating Diesel fuel dispensers
-        DieselFuelDispenseManager DD1 = new DieselFuelDispenseManager(5, dd2.dispenserqueue, "Public transport vehicles", "Diesel", true, DieselFuelAtRepo, totaldiesel, 430, op5);
-        DieselFuelDispenseManager DD2 = new DieselFuelDispenseManager(6, dd2.dispenserqueue, "other vehicles", "Diesel", true, DieselFuelAtRepo, totaldiesel, 430, op6);
-        DieselFuelDispenseManager DD3 = new DieselFuelDispenseManager(7, dd2.dispenserqueue, "other vehicles", "Diesel", true, DieselFuelAtRepo, totaldiesel, 430, op7);
+        DieselFuelDispenseManager DD1 = new DieselFuelDispenseManager(5, dd2.dispenserqueue, "Public transport vehicles", "Diesel", true, DieselFuelAtRepo, totaldiesel, 430, op5, commonQueue);
+        DieselFuelDispenseManager DD2 = new DieselFuelDispenseManager(6, dd2.dispenserqueue, "other vehicles", "Diesel", true, DieselFuelAtRepo, totaldiesel, 430, op6, commonQueue);
+        DieselFuelDispenseManager DD3 = new DieselFuelDispenseManager(7, dd2.dispenserqueue, "other vehicles", "Diesel", true, DieselFuelAtRepo, totaldiesel, 430, op7, commonQueue);
 
         //********* these code need to be rewritten ***********
         System.out.println("\npetrol income " + OCD1.petrolIncome() + "rs");
@@ -414,25 +414,25 @@ public class driver {
         System.out.println("Available fuel in diesel repository :" + availbalefueldiesel + "l");
 
 
-        Thread serviceOCD1 = new Thread(() -> OCD1.run(1));
+        Thread serviceOCD1 = new Thread();
         serviceOCD1.start();
 
-        Thread serviceOCD2 = new Thread(() -> OCD2.run(2));
+        Thread serviceOCD2 = new Thread();
         serviceOCD2.start();
 
-        Thread serviceOCD3 = new Thread(() -> OCD3.run(3));
+        Thread serviceOCD3 = new Thread();
         serviceOCD3.start();
 
-        Thread serviceOCD4 = new Thread(() -> OCD4.run(4));
+        Thread serviceOCD4 = new Thread();
         serviceOCD4.start();
 
-        Thread serviceDD1 = new Thread(() -> DD1.run(5));
+        Thread serviceDD1 = new Thread();
         serviceDD1.start();
 
-        Thread serviceDD2 = new Thread(() -> DD1.run(6));
+        Thread serviceDD2 = new Thread();
         serviceDD2.start();
 
-        Thread serviceDD3 = new Thread(() -> DD1.run(7));
+        Thread serviceDD3 = new Thread();
         serviceDD3.start();
 
         serviceOCD1.join();

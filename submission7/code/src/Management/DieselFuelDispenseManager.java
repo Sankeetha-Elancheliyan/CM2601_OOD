@@ -26,6 +26,7 @@ public class DieselFuelDispenseManager implements FuelDispenseManager, Runnable 
     private int threadNumber;
     private CommonQueue commonQueue;
 
+
     //private String variableName = "dispenser number";
 
     public DieselFuelDispenseManager(int dispenserNumber, Queue<Customer> queue, String vehicleType, String fuelType, boolean availability, double availableDiesel, double fuelPumped, double unitPrice, Operator operator, CommonQueue commonQueue) {
@@ -39,6 +40,7 @@ public class DieselFuelDispenseManager implements FuelDispenseManager, Runnable 
         this.availableDiesel = availableDiesel;
         this.operator = operator;
         this.commonQueue = commonQueue;
+
     }
 
 //    public void setOperator(Operator operator) {
@@ -91,7 +93,7 @@ public class DieselFuelDispenseManager implements FuelDispenseManager, Runnable 
 
 
     @Override
-    public void run(int threadNumber) {
+    public void run() {
         Object lock = new Object();
         while (queue.size() > 0) {
 
@@ -151,9 +153,9 @@ public class DieselFuelDispenseManager implements FuelDispenseManager, Runnable 
                 //check common queue and add
 //                    for (int i = 0; i < commonQueue.commonqueue.size(); i++) {
 //                        Customer currentCustomer = commonQueue.commonqueue.get(i);
-                if (threadNumber == 5) {
-                    for (int i = 0; i < commonQueue.commonqueue.size(); i++) {
-                        Customer currentCustomer = commonQueue.commonqueue.get(i);
+                for (int i = 0; i < commonQueue.commonqueue.size(); i++) {
+                    Customer currentCustomer = commonQueue.commonqueue.get(i);
+                    if (dispenserNumber == 5) {
                         if (currentCustomer.getFuelType().equals("diesel") && currentCustomer.getVehicleType().equals("PublicTransport")) {
                             queue.add(currentCustomer);
                             commonQueue.commonqueue.remove(i);
@@ -170,18 +172,15 @@ public class DieselFuelDispenseManager implements FuelDispenseManager, Runnable 
                                 commonQueue.commonqueue.remove(i);
                                 break;
                             }
-
-
-                        }else{
-                            // stop fuel supply and break loop
-                            stopPumping();
-                            System.out.println("The dispenser " + dispenserNumber + " unavailable until restock");
-                            break;
                         }
-
                     }
+                }
+            }else{
+                    // stop fuel supply and break loop
+                    stopPumping();
+                    System.out.println("The dispenser " + dispenserNumber + " unavailable until restock");
+                    break;
                 }
             }
         }
-    }
 }
