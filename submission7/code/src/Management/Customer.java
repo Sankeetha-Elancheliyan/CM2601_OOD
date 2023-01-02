@@ -5,7 +5,8 @@ import java.io.Serializable;
 public class Customer implements Serializable {
     // Fields to store the customer's name, fuel type, vehicle type, and fuel amount
     private String name, fuelType, VehicleType;
-    private int fuelAmount;
+    private int fuelAmount, customerTicketId;
+
 
     // Constructor to initialize the fields when a Customer object is created
     public Customer(String name, String fuelType, String vehicleType, int fuelAmount) {
@@ -51,5 +52,9 @@ public class Customer implements Serializable {
     // toString method to create a string representation of a Customer object
     public String toString() {
         return "Customer {" + name + "-" + fuelType + "-" + VehicleType + "-" + fuelAmount + "}";
+    }
+
+    public void setTicketNumber(int ticketNumber) {
+        this.customerTicketId = ticketNumber;
     }
 }

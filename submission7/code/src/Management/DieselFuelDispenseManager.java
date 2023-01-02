@@ -11,22 +11,24 @@ import java.sql.SQLOutput;
 import java.sql.Statement;
 
 public class DieselFuelDispenseManager implements FuelDispenseManager, Runnable {
-//    private double fuelPumped,unitPrice,amount;
+    //    private double fuelPumped,unitPrice,amount;
     private Operator operator;
 
     private final Queue<Customer> queue;
-    private double fuelPumped,unitPrice,amount;
+    private double fuelPumped, unitPrice, amount;
     private int dispenserNumber;
     private String fuelType;
     private String vehicleType;
     private boolean availability;
-    private  double availableDiesel;
+    private double availableDiesel;
     private double cash_amount_for_dispence;
     private int severed_vechicle;
+    private int threadNumber;
+    private CommonQueue commonQueue;
 
     //private String variableName = "dispenser number";
 
-    public DieselFuelDispenseManager(int dispenserNumber, Queue<Customer> queue, String vehicleType,  String fuelType, boolean availability, double availableDiesel, double fuelPumped, double unitPrice , Operator operator) {
+    public DieselFuelDispenseManager(int dispenserNumber, Queue<Customer> queue, String vehicleType, String fuelType, boolean availability, double availableDiesel, double fuelPumped, double unitPrice, Operator operator, CommonQueue commonQueue) {
         this.queue = queue;
         this.fuelPumped = fuelPumped;
         this.unitPrice = unitPrice;
@@ -35,7 +37,8 @@ public class DieselFuelDispenseManager implements FuelDispenseManager, Runnable 
         this.vehicleType = vehicleType;
         this.availability = availability;
         this.availableDiesel = availableDiesel;
-        this.operator=operator;
+        this.operator = operator;
+        this.commonQueue = commonQueue;
     }
 
 //    public void setOperator(Operator operator) {
@@ -81,26 +84,28 @@ public class DieselFuelDispenseManager implements FuelDispenseManager, Runnable 
         System.out.println("adding new dispenser");
 
     }
-    public double dieselIncome(){
-        return this.unitPrice*this.fuelPumped;
+
+    public double dieselIncome() {
+        return this.unitPrice * this.fuelPumped;
     }
 
 
-
     @Override
-    public void run() {
+    public void run(int threadNumber) {
+        Object lock = new Object();
         while (queue.size() > 0) {
-            Object lock = new Object();
+
             // synchronize concurrent behavior
-            synchronized (lock) {
-                if (availableDiesel > 500) {
+
+            if (availableDiesel > 500) {
+                synchronized (lock) {
                     // dispense fuel and update available diesel
                     availableDiesel -= queue.peek().getFuelamount();
                     System.out.println("Diesel Supplied of " + queue.peek().getFuelamount() + "L remaining fuel at repository is: " + availableDiesel);
 
                     // handle payment
                     cash_amount_for_dispence = queue.peek().getFuelamount() * unitPrice;
-                    System.out.println("The operator " + operator.getName() + "of id " + operator.getOp_id() + " handled Rs."+ cash_amount_for_dispence +".");
+                    System.out.println("The operator " + operator.getName() + "of id " + operator.getOp_id() + " handled Rs." + cash_amount_for_dispence + ".");
 
                     // update database with customer information
                     try {
@@ -135,17 +140,46 @@ public class DieselFuelDispenseManager implements FuelDispenseManager, Runnable 
                     } catch (Exception e) {
                         System.out.println(e);
                     }
+                }
 
-                    // dequeue customer
-                    System.out.println("the required fuels is for " + queue.peek().getName() + " is :" + queue.peek().getFuelamount());
-                    Customer customer = queue.poll();
-                    System.out.println("Following customer dispensed :" + customer);
-                    System.out.println("\n");
-                } else {
-                    // stop fuel supply and break loop
-                    stopPumping();
-                    System.out.println("The dispenser " + dispenserNumber + " unavailable until restock");
-                    break;
+                // dequeue customer
+                System.out.println("the required fuels is for " + queue.peek().getName() + " is :" + queue.peek().getFuelamount());
+                Customer customer = queue.poll();
+                System.out.println("Following customer dispensed :" + customer);
+                System.out.println("\n");
+
+                //check common queue and add
+//                    for (int i = 0; i < commonQueue.commonqueue.size(); i++) {
+//                        Customer currentCustomer = commonQueue.commonqueue.get(i);
+                if (threadNumber == 5) {
+                    for (int i = 0; i < commonQueue.commonqueue.size(); i++) {
+                        Customer currentCustomer = commonQueue.commonqueue.get(i);
+                        if (currentCustomer.getFuelType().equals("diesel") && currentCustomer.getVehicleType().equals("PublicTransport")) {
+                            queue.add(currentCustomer);
+                            commonQueue.commonqueue.remove(i);
+                            break;
+                        } else if (threadNumber == 6) {
+                            if (currentCustomer.getFuelType().equals("diesel") && currentCustomer.getVehicleType().equals("Other")) {
+                                queue.add(currentCustomer);
+                                commonQueue.commonqueue.remove(i);
+                                break;
+                            }
+                        } else {
+                            if (currentCustomer.getFuelType().equals("diesel") && currentCustomer.getVehicleType().equals("Other")) {
+                                queue.add(currentCustomer);
+                                commonQueue.commonqueue.remove(i);
+                                break;
+                            }
+
+
+                        }else{
+                            // stop fuel supply and break loop
+                            stopPumping();
+                            System.out.println("The dispenser " + dispenserNumber + " unavailable until restock");
+                            break;
+                        }
+
+                    }
                 }
             }
         }
