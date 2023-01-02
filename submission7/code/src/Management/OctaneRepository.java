@@ -8,12 +8,12 @@ public class OctaneRepository extends CentralRepository {
     private ArrayList<OctaneFuelDispenseManager> listOfPetrolDispenser = new ArrayList<>();
 
     /**
-     * Constructor to create a new OctaneRepository with the given details
-     * @param stockAmount initial stock amount of fuel in the repository
-     * @param capacity maximum capacity of the repository
-     * @param datetime date and time the repository was created
-     * @param is500L whether the repository is for 500L tanks or not
-     * @param availableFuel initial available fuel in the repository
+     * Constructor - to create a new OctaneRepository with the given details
+     * stockAmount - initial stock amount of fuel in the repository
+     * capacity - maximum capacity of the repository
+     * datetime - date and time the repository was created
+     * is500L - whether the repository is for 500L tanks or not
+     * availableFuel - initial available fuel in the repository
      */
     public OctaneRepository(double stockAmount, double capacity, DateTime datetime, boolean is500L, double availableFuel) {
         super(stockAmount, capacity, datetime, is500L);
@@ -22,7 +22,7 @@ public class OctaneRepository extends CentralRepository {
 
     /**
      * Adds a new OctaneFuelDispenseManager to the list of petrol dispensers
-     * @param d OctaneFuelDispenseManager to add to the list
+     * d - OctaneFuelDispenseManager to add to the list
      */
     public void addListOfDieselDispenser(OctaneFuelDispenseManager d) {
         this.listOfPetrolDispenser.add(d);
@@ -30,7 +30,7 @@ public class OctaneRepository extends CentralRepository {
 
     /**
      * Removes an OctaneFuelDispenseManager from the list of petrol dispensers
-     * @param d OctaneFuelDispenseManager to remove from the list
+     * d - OctaneFuelDispenseManager to remove from the list
      */
     public void removeListOfDieselDispenser(OctaneFuelDispenseManager d) {
         this.listOfPetrolDispenser.remove(d);
@@ -38,7 +38,7 @@ public class OctaneRepository extends CentralRepository {
 
     /**
      * Returns the available fuel in the repository
-     * @return available fuel in the repository
+     * return available fuel in the repository
      */
     public double getAvailableFuel() {
         return availableFuel;
@@ -46,7 +46,7 @@ public class OctaneRepository extends CentralRepository {
 
     /**
      * Sets the available fuel in the repository
-     * @param availableFuel available fuel to set for the repository
+     * availableFuel- available fuel to set for the repository
      */
     public void setAvailableFuel(double availableFuel) {
         this.availableFuel = availableFuel;

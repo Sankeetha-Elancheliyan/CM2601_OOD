@@ -9,7 +9,6 @@ public class Operator {
 
     /**
      * Constructor to create a new operator with the given name
-     * @param name name of the operator
      */
     public Operator(String name) {
         this.name = name;
@@ -19,7 +18,6 @@ public class Operator {
 
     /**
      * Returns the name of the operator
-     * @return name of the operator
      */
     public String getName() {
         return name;
@@ -27,7 +25,7 @@ public class Operator {
 
     /**
      * Sets the name of the operator
-     * @param name name to set for the operator
+     *name - name to set for the operator
      */
     public void setName(String name) {
         this.name = name;
@@ -35,7 +33,6 @@ public class Operator {
 
     /**
      * Returns the id of the operator
-     * @return id of the operator
      */
     public int getOp_id() {
         return op_id;
@@ -43,7 +40,6 @@ public class Operator {
 
     /**
      * Sets the id of the operator
-     * @param op_id id to set for the operator
      */
     public void setOp_id(int op_id) {
         this.op_id = op_id;
@@ -51,7 +47,6 @@ public class Operator {
 
     /**
      * Returns a string representation of the operator in the format "Operator{name-op_id}"
-     * @return string representation of the operator
      */
     @Override
     public String toString() {

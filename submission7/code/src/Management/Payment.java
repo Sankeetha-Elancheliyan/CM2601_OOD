@@ -15,10 +15,10 @@ public class Payment {
     /**
      * Constructor to create a new payment with the given details
      *
-     * @param paymentType  type of payment (e.g. cash, credit card)
-     * @param paymentValue value of the payment
-     * @param customer     customer making the payment
-     * @param operator     operator processing the payment
+     * paymentType -  type of payment (e.g. cash, credit card)
+     * paymentValue - value of the payment
+     * customer -     customer making the payment
+     * operator -     operator processing the payment
      */
     public Payment(String paymentType, double paymentValue, Customer customer, Operator operator) {
         this.paymentType = paymentType;
@@ -31,8 +31,6 @@ public class Payment {
 
     /**
      * Returns the payment id
-     *
-     * @return payment id
      */
 
     public int getPaymentId() {
@@ -41,8 +39,6 @@ public class Payment {
 
     /**
      * Sets the payment id
-     *
-     * @param paymentId value to set payment id to
      */
     public void setPaymentId(int paymentId) {
         this.paymentId = paymentId;
@@ -50,8 +46,6 @@ public class Payment {
 
     /**
      * Returns the type of payment
-     *
-     * @return type of payment
      */
     public String getPaymentType() {
         return paymentType;
@@ -59,8 +53,6 @@ public class Payment {
 
     /**
      * Returns the customer making the payment
-     *
-     * @return customer making the payment
      */
     public Customer getCustomer() {
         return customer;
@@ -68,8 +60,6 @@ public class Payment {
 
     /**
      * Sets the type of payment
-     *
-     * @param paymentType value to set payment type to
      */
     public void setPaymentType(String paymentType) {
         this.paymentType = paymentType;
@@ -77,8 +67,6 @@ public class Payment {
 
     /**
      * Returns the value of the payment
-     *
-     * @return value of the payment
      */
     public double getPaymentValue() {
         return paymentValue;
@@ -86,8 +74,6 @@ public class Payment {
 
     /**
      * Sets the value of the payment
-     *
-     * @param paymentValue value to set payment value to
      */
     public void setPaymentValue(double paymentValue) {
         this.paymentValue = paymentValue;
@@ -95,8 +81,6 @@ public class Payment {
 
     /**
      * Returns a string representation of the payment in the format "Payment{paymentType-paymentValue - customer - operator}"
-     *
-     * @return string representation of the payment
      */
     @Override
     public String toString() {
@@ -110,8 +94,6 @@ public class Payment {
 
     /**
      * Returns the operator who processed the payment
-     *
-     * @return operator who processed the payment
      */
     public Operator getOperator() {
         return operator;
@@ -119,8 +101,6 @@ public class Payment {
 
     /**
      * Sets the operator who processed the payment
-     *
-     * @param operator operator who processed the payment
      */
     public void setOperator(Operator operator) {
         this.operator = operator;

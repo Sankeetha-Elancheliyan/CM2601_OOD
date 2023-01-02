@@ -11,7 +11,7 @@ import java.sql.SQLOutput;
 import java.sql.Statement;
 
 public class DieselFuelDispenseManager implements FuelDispenseManager, Runnable {
-    //    private double fuelPumped,unitPrice,amount;
+
     private Operator operator;
 
     private final Queue<Customer> queue;
@@ -22,12 +22,9 @@ public class DieselFuelDispenseManager implements FuelDispenseManager, Runnable 
     private boolean availability;
     private double availableDiesel;
     private double cash_amount_for_dispence;
-    private int severed_vechicle;
-    private int threadNumber;
+
     private CommonQueue commonQueue;
 
-
-    //private String variableName = "dispenser number";
 
     public DieselFuelDispenseManager(int dispenserNumber, Queue<Customer> queue, String vehicleType, String fuelType, boolean availability, double availableDiesel, double fuelPumped, double unitPrice, Operator operator, CommonQueue commonQueue) {
         this.queue = queue;
@@ -42,10 +39,6 @@ public class DieselFuelDispenseManager implements FuelDispenseManager, Runnable 
         this.commonQueue = commonQueue;
 
     }
-
-//    public void setOperator(Operator operator) {
-//        this.operator = operator;
-//    }
 
     public double getFuelPumped() {
         return fuelPumped;
@@ -97,9 +90,9 @@ public class DieselFuelDispenseManager implements FuelDispenseManager, Runnable 
         Object lock = new Object();
         while (queue.size() > 0) {
 
-            // synchronize concurrent behavior
-
+            //Check availability if the diesel fuel available is > 500
             if (availableDiesel > 500) {
+
                 synchronized (lock) {
                     // dispense fuel and update available diesel
                     availableDiesel -= queue.peek().getFuelamount();
@@ -109,50 +102,55 @@ public class DieselFuelDispenseManager implements FuelDispenseManager, Runnable 
                     cash_amount_for_dispence = queue.peek().getFuelamount() * unitPrice;
                     System.out.println("The operator " + operator.getName() + "of id " + operator.getOp_id() + " handled Rs." + cash_amount_for_dispence + ".");
 
-                    // update database with customer information
+                    // updating database with customer information
                     try {
                         Connection con = DriverManager.getConnection(
                                 "jdbc:mysql://localhost:3306/Petrol_Station_Queue_Management", "admin", "admin"
                         );
-                        // create prepared statement with insert query
+
+                        // Create a prepared statement with an INSERT query
                         String sql = "INSERT INTO customer (name, fuelType, vehicleType, amount) VALUES (?, ?, ?, ?)";
                         PreparedStatement stmt = con.prepareStatement(sql);
-                        // set values of placeholders
+
+                        // Set values of placeholders
                         stmt.setString(1, queue.peek().getName());
                         stmt.setString(2, queue.peek().getFuelType());
                         stmt.setString(3, queue.peek().getVehicleType());
                         stmt.setInt(4, queue.peek().getFuelamount());
-                        // serialize object to byte array
+
+                        // Serialize object to byte array
                         ByteArrayOutputStream baos = new ByteArrayOutputStream();
                         ObjectOutputStream oos = new ObjectOutputStream(baos);
                         oos.writeObject(queue.peek());
                         byte[] data = baos.toByteArray();
-                        // set prepared statement's parameter to serialized object
+
+                        // Set the prepared statement's parameter to the serialized object
                         stmt.setObject(1, data[0]);
                         stmt.setObject(2, data[1]);
                         stmt.setObject(3, data[2]);
                         stmt.setObject(4, data[3]);
-                        // execute prepared statement
+
+                        // Execute the prepared statement
                         stmt.executeUpdate();
-                        // close streams and connection
+
+                        // Close the streams and connection
                         oos.close();
                         baos.close();
                         stmt.close();
                         con.close();
+
                     } catch (Exception e) {
                         System.out.println(e);
                     }
                 }
 
-                // dequeue customer
+                // Dequeue customer
                 System.out.println("the required fuels is for " + queue.peek().getName() + " is :" + queue.peek().getFuelamount());
                 Customer customer = queue.poll();
                 System.out.println("Following customer dispensed :" + customer);
                 System.out.println("\n");
 
-                //check common queue and add
-//                    for (int i = 0; i < commonQueue.commonqueue.size(); i++) {
-//                        Customer currentCustomer = commonQueue.commonqueue.get(i);
+                //Check the common queue and if any diesel vehicles are there add them to the relevant dispenser
                 for (int i = 0; i < commonQueue.commonqueue.size(); i++) {
                     Customer currentCustomer = commonQueue.commonqueue.get(i);
                     if (dispenserNumber == 5) {
@@ -160,7 +158,7 @@ public class DieselFuelDispenseManager implements FuelDispenseManager, Runnable 
                             queue.add(currentCustomer);
                             commonQueue.commonqueue.remove(i);
                             break;
-                        } else if (threadNumber == 6) {
+                        } else if (dispenserNumber == 6) {
                             if (currentCustomer.getFuelType().equals("diesel") && currentCustomer.getVehicleType().equals("Other")) {
                                 queue.add(currentCustomer);
                                 commonQueue.commonqueue.remove(i);

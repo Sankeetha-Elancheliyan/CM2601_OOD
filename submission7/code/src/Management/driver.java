@@ -335,9 +335,9 @@ public class driver {
         DieselFuelDispenseManager DD3 = new DieselFuelDispenseManager(7, dd2.dispenserqueue, "other vehicles", "Diesel", true, DieselFuelAtRepo, totaldiesel, 430, op7, commonQueue);
 
         //********* these code need to be rewritten ***********
-        System.out.println("\npetrol income " + OCD1.petrolIncome() + "rs");
-        System.out.println("diesel income " + DD2.dieselIncome() + "rs");
-        System.out.println("\nLargest amount of the fuel amount of the day :" + max + "L. \nDetails -:" + cus);
+        System.out.println("\nTotal Petrol income Rs. " + OCD1.petrolIncome());
+        System.out.println("Total Diesel income Rs." + DD2.dieselIncome());
+        System.out.println("\nThe Largest amount of the fuel amount of the day :" + max + "L. \nDetails -:" + cus);
 
         double availbalefuelpetrol = octanerepo.getAvailableFuel() - totalpetrol;
         double availbalefueldiesel = dieselrepo.getAvailableFuel() - totaldiesel;
@@ -345,25 +345,25 @@ public class driver {
         System.out.println("Available fuel in diesel repository :" + availbalefueldiesel + "l");
 
 
-        Thread serviceOCD1 = new Thread();
+        Thread serviceOCD1 = new Thread(OCD1);
         serviceOCD1.start();
 
-        Thread serviceOCD2 = new Thread();
+        Thread serviceOCD2 = new Thread(OCD2);
         serviceOCD2.start();
 
-        Thread serviceOCD3 = new Thread();
+        Thread serviceOCD3 = new Thread(OCD3);
         serviceOCD3.start();
 
-        Thread serviceOCD4 = new Thread();
+        Thread serviceOCD4 = new Thread(OCD4);
         serviceOCD4.start();
 
-        Thread serviceDD1 = new Thread();
+        Thread serviceDD1 = new Thread(DD1);
         serviceDD1.start();
 
-        Thread serviceDD2 = new Thread();
+        Thread serviceDD2 = new Thread(DD2);
         serviceDD2.start();
 
-        Thread serviceDD3 = new Thread();
+        Thread serviceDD3 = new Thread(DD3);
         serviceDD3.start();
 
         serviceOCD1.join();

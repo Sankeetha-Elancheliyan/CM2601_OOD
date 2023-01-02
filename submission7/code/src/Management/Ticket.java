@@ -14,4 +14,6 @@ public class Ticket {
     public void setTicketId(int ticketId) {
         this.ticketId = ticketId;
     }
+
+
 }
